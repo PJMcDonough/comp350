@@ -24,6 +24,8 @@ A guest may cancel a reservation for a service at no charge, if he/she does so w
 
 
 ######SERVICES:########################################## 
+
+
 Guests can reserve mineral bath servicesfor 60 minutes or 90 minutes @ $2.50/minute. 
 There are three kinds of massage services (Swedish, shiatsu, and deep tissue), which guests can schedule for 30 or 60 minutes @ $3.00/minute. 
 (There are 2 kinds of facial services (normal and collagen), which guests can schedule for 30 or 60 minutes @ $2.00/minute. 
