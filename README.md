@@ -2,6 +2,7 @@
 #####################
 Spa Application
 ####################
+
 The project is to create software for “Mud in Your Eye” (MiYE), a new, small hot spring health spa, located in a remote, scenic part of the US. 
 The owner of MiYE wants new software to improvethespa’s operations, making it easier for customers to reserveservices and for employees to presentcustomers with their bills at checkout.
 MiYE is a full-timeresort spa facility1, but being very small it has just one front desk clerkon duty at any time. 
