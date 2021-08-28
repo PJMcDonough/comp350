@@ -21,6 +21,8 @@ Charges are made at the time of reservations.
 Reservationsare necessary for all services. 
 Payment of charges occurs at checkout.(Payment is a separate process, which also includes charges for rooms, food, and other things besides services.)
 A guest may cancel a reservation for a service at no charge, if he/she does so within 10 minutes of making the reservation or at least 90 minutes before the reservation time; otherwise the guest is charged for the service, received or not. 
+
+
 ######SERVICES:########################################## 
 Guests can reserve mineral bath servicesfor 60 minutes or 90 minutes @ $2.50/minute. 
 There are three kinds of massage services (Swedish, shiatsu, and deep tissue), which guests can schedule for 30 or 60 minutes @ $3.00/minute. 
