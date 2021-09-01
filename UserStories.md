@@ -2,6 +2,7 @@
 #######Refere to This link to help You write  User Story#####
 https://www.atlassian.com/agile/project-management/user-stories
 ##############################################################
+
 Story 1a: Mini the mineral spa lover wants the receptionist to be able to schedule her for the mineral spa. Stories 1b-z: Similar for other users. Phone not needed. 
 
 Story 2: Rosy the receptionist wants to be able to schedule anything she sees open (no race condition) so she doesn't have to go back on her word. 
