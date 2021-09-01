@@ -4,23 +4,16 @@ public class SpaReservation
     private enum  userChoice {MAKE,VIEW,CANCEL}
     public static boolean[] availableTime = new boolean[24]; // 12hrs available = 720 / 30
 
+    private static LinkedList<Reservation> totalRes = new LinkedList<Reservation>();
     private double totalRevenue = 0;
-    private static final int START_TIME = 8; // 8 am
-    private static final int END_TIME = 20; // 8pm
-    //Check if valid before and the end
-            /*for(int i = 0; i < chooseTimeDuration/30; i++)
-            {
-                SpaReservation.availableTime[START_TIME + i] = true;
-            }*/
-
+    private static final int OPEN_TIME = 8; // 8 am
+    private static final int CLOSE_TIME = 20; // 8pm
 
     public static int chooseTimeDuration(int type)
     {
         Scanner scan = new Scanner(System.in);
-        int[] result = {30,60,90};
+        int[] result = {30,60,90}; int input = 0;
 
-        boolean valid = false;
-        int input = 0;
         while(input != result[type] && input != result[type + 1])
         {
             try {
@@ -36,109 +29,206 @@ public class SpaReservation
         return input;
     }
 
-    public static Reservation spaServices(int start,String spaTypeInput)
+    public static specialType specialityCare(String customerInput)
     {
-        int duration = 0;
-        double price = 0;
-        String input;
-        specialType specialMassage = null;
+        if (customerInput.toLowerCase().equals("mineral bath"))
+            return null;
+        System.out.printf("Which type of %s would you like\n", customerInput.toLowerCase());
+        String input = new Scanner(System.in).next(); //Ask for their specific treatment
 
-        spaTypeInput = spaTypeInput.toUpperCase();
-        switch (spaTypeInput)
+        switch (input.toUpperCase())
         {
-            case "MASSAGE":
-                price = spaType.MASSAGE.price;
-                duration = chooseTimeDuration(0);
-
-                System.out.println("Which type of massage would you like");
-                input = new Scanner(System.in).next();
-                specialMassage = specialType.valueOf(input);
-
+            case "SWEDISH": case "SHIATSU": case "DEEP_TISSUE":
+                if(!customerInput.equals("MASSAGE"))
+                {
+                    System.out.println("Sorry it looks like you choose the wrong option");
+                    specialityCare(customerInput); //wrong input, go back
+                }
                 break;
-            case "FACIALS":
-                price = spaType.FACIALS.price;
-                duration = chooseTimeDuration(0);
-
-                System.out.println("Which type of facials would you like");
-                input = new Scanner(System.in).next();
-                specialMassage = specialType.valueOf(input);
-
-                break;
-            case "SPECIAL TREATMENT":
-                price = spaType.SPECIAL_TREATMENT.price;
-                duration = chooseTimeDuration(1);
-
-                System.out.println("Which type of special treatment would you like");
-                input = new Scanner(System.in).next();
-                specialMassage = specialType.valueOf(input);
-
-                break;
-            case "MINERAL BATH":
-                price = spaType.MINERAL_BATH.price;
-                duration = chooseTimeDuration(1);
+            case "NORMAL": case "COLLAGEN":
+                if(!customerInput.equals("FASCIALS"))
+                {
+                    System.out.println("Sorry it looks like you choose the wrong option");
+                    specialityCare(customerInput); //wrong input, go back
+                }
+            break;
+            case "HOT STONE": case "SUGAR SCRUB": case "HERBAL BODY WRAP": case "BOTANICAL MUD WRAP":
+                if(!customerInput.equals("SPECIAL TREATMENT"))
+                {
+                    System.out.println("Sorry it looks like you choose the wrong option");
+                    specialityCare(customerInput); //wrong input, go back
+                }
+            break;
+            default:
+                specialityCare(customerInput);
         }
 
-        return new Reservation(start,specialMassage,duration,price,start + (duration/60));
+        return specialType.valueOf(input);
+    }
+
+    public static Reservation spaServices(int start,String customerName,String spaTypeInput)
+    {
+        spaType spa = spaType.valueOf(spaTypeInput);// Either massage, facial, special treatment, or bath
+
+        switch (spaTypeInput){ //Ensures that it has a correct input
+            case "MASSAGE":case "FACIALS":case "SPECIAL TREATMENT": case "MINERAL BATH":
+                break;
+            default:
+                System.out.println("Sorry something went wrong!");
+                System.out.println("Please input your spa type");
+                String input = new Scanner(System.in).next();
+                spaServices(start,customerName,input);
+        }
+
+        int duration = chooseTimeDuration(spa.label.equals("FACIALS") || spa.label.equals("MASSAGE") ? 0 : 1);
+        specialType specialMassage = specialityCare(spaTypeInput);
+
+        return new Reservation(start,customerName,specialMassage,duration,spa.price);
     }
 
     //Reservations to avoid overlap: 1 = free, 0 = N/A
 
     public static void main(String[]args){
 
-        LinkedList<Reservation> totalRes = new LinkedList<Reservation>();
         Scanner scan = new Scanner(System.in);
 
         //Start in an introductory UI
         //3 options: make reservation, view reservation, cancel,
-        System.out.println("Hello, how can we help you");
-
         //have some kind of clicking interface
         // if make - > chose from available time (no overlap), maybe linked list
         // if view -> display the linked list of reservations
         // if cancel -> remove from linked list and add on
-
-        switch (userChoice)
+        System.out.println("Hello, how can we help you");
+        switch (scan.next())
         {
-            case MAKE:
-                int input;
-                String temp;
-                do {
-                    System.out.println("At what time would you like to make your appointment?");
-                    temp = scan.next();
-                    input = temp.charAt(0);
+            case "MAKE":
+                int appointmentInput = makeAppointment();
+                String spaTypeInput = selectingSpaType();
 
-                }while(input < SpaReservation.START_TIME || input > SpaReservation.END_TIME || temp.length() > 5);
+                System.out.println("Please enter your name for the reservation");
+                String name = scan.next();
 
-                if(temp.endsWith("pm"))
-                    input += 12;
-
-                do {
-                    System.out.println("What type of spa would you like ?");
-                    temp = scan.next();
-
-                }while(!temp.equals(spaType.FACIALS.label) && !temp.equals(spaType.MASSAGE.label) &&
-                    !temp.equals(spaType.MINERAL_BATH.label) && !temp.equals(spaType.SPECIAL_TREATMENT.label));
-
-                totalRes.add(spaServices(input,temp));
-
-
+                Reservation newRes = spaServices(appointmentInput,name,spaTypeInput);
+                markTime(appointmentInput,newRes.getTime());
+                totalRes.add(newRes);
                 break;
-            case VIEW:
-                Object arr[] = totalRes.toArray();
 
-                for(int i = 0; i < arr.length; i++)
-                {
-
-                    System.out.println();
-                }
+            case "VIEW":
+                displayReservation((Reservation[]) totalRes.toArray());
                 break;
-            case CANCEL:
+            case "CANCEL":
+                ///NEEDS WORK!
                 //ask for info: number, time, or name
-                //if they have id
-                //totalRes.remove(num,)
+                System.out.println("Please enter your ID number, your time, or your name");
+                removeReservation(scan.next());
+                break;
 
-                totalRes.remove();
+            default:
+                System.out.println("Sorry something went wrong!");
         }
+    }
+
+    public static void removeReservation(String input)
+    {
+        Reservation[] arr = (Reservation[]) totalRes.toArray();
+        for(int i = 0; i < arr.length; i++)
+        {
+            if (arr[i].getName().equals(input)) // if a name
+            {
+                arr[i] = null;
+                break;
+            }
+
+            // a number
+            if(!input.contains(":"))
+            {
+                System.out.println("Sorry we didn't find a time or a name that you requested.");
+                return;
+            }
+
+            input.split(" : ");
+            Scanner scanner = new Scanner(input);
+
+            if (!scanner.hasNextInt()) {
+                System.out.println("Sorry we didn't detect any number associated with time.");
+                return;
+            }
+
+            int hour = scanner.nextInt(), min = scanner.hasNextInt() ? scanner.nextInt() : 0;
+
+            // 1st want to find and remove it and set available time to false
+            if(arr[i].getStartTime() == hour)
+            {
+                if(arr[i].getTime() == min)
+                {
+                    arr[i] = null;
+                    break;
+
+                }
+            }
+        }
+    }
+
+    private static String selectingSpaType() {
+        String temp;
+        Scanner scan = new Scanner(System.in);
+
+        System.out.println("What type of spa would you like?");
+        temp = scan.next();
+
+        //if it found a spa type return
+        for (spaType spaType : spaType.values())
+            if (spaType.label.equals(temp))
+                return temp;
+
+        // if not correct, return with recursion
+        System.out.println("Sorry your spa request is invalid!\n");
+        return selectingSpaType();
+    }
+
+    private static int makeAppointment()
+    {
+        int result;
+        String temp;
+        Scanner scan = new Scanner(System.in);
+
+        do {
+            System.out.println("At what time would you like to make your appointment?");
+            temp = scan.next();
+            //how to separate ':' to just get hr and min
+            result = temp.charAt(0);
+
+        }while(result < SpaReservation.OPEN_TIME || result > SpaReservation.CLOSE_TIME || temp.length() > 5);
+
+        if(temp.endsWith("pm"))
+            result += 12;
+
+        return  result;
+    }
+
+    private static void displayReservation(Reservation[] a)
+    {
+        if(a == null)
+            return;
+
+        for(int i = 0; i < a.length; i++)
+        {
+            System.out.println("Customer: " + (1+i) );
+            System.out.println("Name: " + a[i].getName());
+            System.out.println("Price: " + a[i].getPrice());
+            System.out.println("Starting Time: " + a[i].getStartTime());
+            System.out.println("Duration: " + a[i].getTime());
+            System.out.println("\n");
+        }
+
+        if(a.length == 0)
+            System.out.println("Sorry there are no available reservations");
+    }
+
+    private static void markTime(int startTime,int duration) {
+        //Marks all time from startTime to be unavailable
+        for(int i = startTime - OPEN_TIME; i < (duration/30); i++)
+            availableTime[i] = true;
     }
 
 }
