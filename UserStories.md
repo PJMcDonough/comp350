@@ -22,4 +22,10 @@ Story 9: As Amy (Front Desk Employee) I want to be able to make appointments for
 
 Story 10:As Melissa I want to be able to Use my credit card to pay for the Spa
 
+story 11: A guest wants to call the front desk employee and book an overnight stay, recieving there 
+room information and billing expenses.
+
+story 12: An overnight guest wants to order room service, so they call the front desk and asks for what food is available and how much the food costs.
+
+
 
