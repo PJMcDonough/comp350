@@ -1,5 +1,5 @@
 # comp350
-## Spa Application
+## "Mid in Your Eye Spa" Application
 
 The project is to create software for “Mud in Your Eye” (MiYE), a new, small hot spring health spa, located in a remote, scenic part of the US. 
 The owner of MiYE wants new software to improvethespa’s operations, making it easier for customers to reserveservices and for employees to presentcustomers with their bills at checkout.
@@ -42,6 +42,5 @@ The software must be correct. Full testing is expected and should be explained d
 The software must be flexible enough to easily accommodate changes 
 
 ## TODO:
-+ Merger **User Stories PDF** with **User Stories Mardown**
-+ Create Docker Image
-+ 
++ [ ] Merger **User Stories PDF** with **User Stories Mardown**
++ [ ] Create Docker Image
