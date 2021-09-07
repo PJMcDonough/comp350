@@ -1,7 +1,5 @@
 # comp350
-#####################
-Spa Application
-####################
+## Spa Application
 
 The project is to create software for “Mud in Your Eye” (MiYE), a new, small hot spring health spa, located in a remote, scenic part of the US. 
 The owner of MiYE wants new software to improvethespa’s operations, making it easier for customers to reserveservices and for employees to presentcustomers with their bills at checkout.
@@ -24,7 +22,7 @@ Payment of charges occurs at checkout.(Payment is a separate process, which also
 A guest may cancel a reservation for a service at no charge, if he/she does so within 10 minutes of making the reservation or at least 90 minutes before the reservation time; otherwise the guest is charged for the service, received or not. 
 
 
-######SERVICES:########################################## 
+## SERVICES:
 
 
 Guests can reserve mineral bath servicesfor 60 minutes or 90 minutes @ $2.50/minute. 
