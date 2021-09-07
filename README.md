@@ -41,9 +41,5 @@ It should calculate the amount charged for each service, as well as a total (pre
 The software must be correct. Full testing is expected and should be explained during the presentation.
 The software must be flexible enough to easily accommodate changes 
 
-## TODO:
-+ [ ] Merger **User Stories PDF** with **User Stories Mardown**
-+ [ ] Create Docker Image
-
 ## Useful Link
 + [Link to Docker Image](https://www.docker.com/) <img src="img/docker.png" alt="alt text" width="50" height="50">
