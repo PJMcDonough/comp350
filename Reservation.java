@@ -3,9 +3,10 @@ public class Reservation
     private int time;
     private int startTime;
     private String customer;
-    private specialType special;
+    private SpecialType special;
     private double price;
-    public Reservation(int startTime,String customer,specialType special,int chooseTimeDuration, double value)
+
+    public Reservation(int startTime, String customer, SpecialType special, int chooseTimeDuration, double value)
     {
         setPrice(value);
         setTime(chooseTimeDuration);
@@ -29,11 +30,11 @@ public class Reservation
         this.time = timeVal;
     }
 
-    public void setSpecial(specialType special) {
+    public void setSpecial(SpecialType special) {
         this.special = special;
     }
 
-    public specialType getSpecial() {
+    public SpecialType getSpecial() {
         return special;
     }
 
