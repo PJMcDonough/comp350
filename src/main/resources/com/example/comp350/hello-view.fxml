@@ -20,8 +20,8 @@
             <Accordion layoutX="6.0" layoutY="162.0" />
             <MenuButton layoutX="481.0" layoutY="36.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="398.0" text="Reservation">
                 <items>
-                    <MenuItem mnemonicParsing="false" text="My Reservation" />
-                    <MenuItem mnemonicParsing="false" text="Set Reservation" />
+                    <MenuItem mnemonicParsing="false" text="My Reservations"/>
+                    <MenuItem mnemonicParsing="false" text="Set Reservation" onAction="#onReservationClick"/>
                 </items>
             </MenuButton>
             <MenuButton layoutX="879.0" layoutY="36.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="386.0" text="Services">
@@ -32,6 +32,7 @@
             </MenuButton>
             <Button layoutX="1265.0" layoutY="36.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="661.0" text="About US" />
             <TextArea layoutX="502.0" layoutY="503.0" prefHeight="200.0" prefWidth="1323.0" text="About Us" />
+            <Button text="Make Reservations" fx:id="makeReservation" onAction="#onReservationClick"/>
         </children>
     </AnchorPane>
 </VBox>
