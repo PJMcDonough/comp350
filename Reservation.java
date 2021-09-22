@@ -1,23 +1,24 @@
-public class Reservation {
+public class Reservation
+{
     private int time;
-    private int startTime,endTime;
-    private specialType special;
+    private int startTime;
+    private String customer;
+    private SpecialType special;
     private double price;
-    public Reservation(int startTime, specialType special,int chooseTimeDuration, double value,int endTime)
+
+    public Reservation(int startTime, String customer, SpecialType special, int chooseTimeDuration, double value)
     {
         setPrice(value);
         setTime(chooseTimeDuration);
         setStartTime(startTime);
-        setEndTime(endTime);
-        this.special = special;
+        setName(customer);
+        setSpecial(special);
     }
+
+    public void setName(String name){this.customer = customer;}
 
     public void setStartTime(int startTime) {
         this.startTime = startTime;
-    }
-
-    public void setEndTime(int endTime) {
-        this.endTime = endTime;
     }
 
     public void setPrice(double price) {
@@ -29,9 +30,21 @@ public class Reservation {
         this.time = timeVal;
     }
 
+    public void setSpecial(SpecialType special) {
+        this.special = special;
+    }
+
+    public SpecialType getSpecial() {
+        return special;
+    }
+
     public double getPrice() {
         return price;
     }
+
+    public int getStartTime() { return startTime; }
+
+    public String getName(){return this.customer;}
 
     public int getTime() {
         return time;
