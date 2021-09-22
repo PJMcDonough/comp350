@@ -1,4 +1,6 @@
+package com.example.comp350;
 import java.util.*;
+
 public class SpaReservation
 {
     public static boolean[] availableTime = new boolean[24]; // 12hrs available = 720 / 30
@@ -99,7 +101,7 @@ public class SpaReservation
     /*
         Customers can make their reservation
     */
-    private static void makeSpaReservation()
+    public static void makeSpaReservation()
     {
         int appointmentInput = makeAppointment();
         String spaTypeInput = selectingSpaType();

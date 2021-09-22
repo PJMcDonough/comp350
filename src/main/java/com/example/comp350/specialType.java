@@ -1,3 +1,4 @@
+package com.example.comp350;
 public enum specialType {
     SWEDISH,SHIATSU,DEEP_TISSUE,
     NORMAL, COLLAGEN,

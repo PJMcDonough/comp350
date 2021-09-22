@@ -1,3 +1,4 @@
+package com.example.comp350;
 import java.util.*;
 public class SpaLogin
 {

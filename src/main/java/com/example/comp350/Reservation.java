@@ -1,3 +1,4 @@
+package com.example.comp350;
 public class Reservation
 {
     private int time;

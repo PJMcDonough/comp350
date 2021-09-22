@@ -2,7 +2,6 @@ package com.example.comp350;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-
 import java.util.Scanner;
 
 public class HelloController {
@@ -22,7 +21,7 @@ public class HelloController {
         /*
             How to link SpaRerservation.java to this to make the button
          */
-        //SpaReservation.makeSpaReservation();
+        SpaReservation.makeSpaReservation();
     }
 /*
     @FXML
