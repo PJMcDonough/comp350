@@ -4,6 +4,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
+import java.util.Scanner;
+
 public class HelloController {
     @FXML
     private Label welcomeText;
@@ -11,7 +13,13 @@ public class HelloController {
     public Button makeReservation;
     public void onReservationClick()
     {
-        System.out.println("Debug Israel Patrick");
+        System.out.println("When and what kind?");
+        Scanner testing = new Scanner(System.in);
+        String when = testing.next();
+        String whatKind = testing.next();
+
+        System.out.println("The Customer wants a " + whatKind + " at " + when);
+
     }
 /*
     @FXML
