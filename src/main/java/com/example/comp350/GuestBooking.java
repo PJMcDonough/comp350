@@ -1,3 +1,4 @@
+/*
 package com.example.comp350;
 
 import java.util.Scanner;
@@ -53,4 +54,4 @@ public class GuestBooking {
         }
         return room;
     }
-}
+}*/
