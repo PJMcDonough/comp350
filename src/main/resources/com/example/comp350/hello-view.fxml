@@ -30,7 +30,7 @@
                     <MenuItem mnemonicParsing="false" text="Action 2" />
                 </items>
             </MenuButton>
-            <Button layoutX="1265.0" layoutY="36.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="661.0" text="About US" />
+            <Button layoutX="1265.0" layoutY="36.0" mnemonicParsing="false" prefHeight="38.0" fx:id="aboutUsButn" onAction="#aboutUsAction" prefWidth="661.0" text="About US" />
             <TextArea layoutX="502.0" layoutY="503.0" prefHeight="200.0" prefWidth="1323.0" text="About Us" />
         </children>
     </AnchorPane>
