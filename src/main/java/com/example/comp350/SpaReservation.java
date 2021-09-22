@@ -6,23 +6,29 @@ public class SpaReservation
     public static boolean[] availableTime = new boolean[24]; // 12hrs available = 720 / 30
     private static Scanner scan = new Scanner(System.in);
     private static LinkedList<Reservation> totalRes = new LinkedList<>();
-    private static LinkedList<Banking> customerFinancialInfo = new LinkedList<>();;
     public static double totalRevenue = 0;
+
     private static final int OPEN_TIME = 8; // 8 am
     private static final int CLOSE_TIME = 20; // 8pm
     private static final int MAX_TIME_LENGTH = 5;
+    private static final int HALF_HOUR = 30;
+    private static final int HOUR = 60;
+    private static final int HOUR_HALF = 90;
 
     /*
         Customers can choose a time duration from 3 options: 30 ,60, 90 mins
     */
-    private static int chooseTimeDuration(int type)
+    private static int chooseTimeDuration(boolean userChoiceType)
     {
-        int[] result = {30,60,90}; int input = 0;
+        int input = 0;
 
-        while(input != result[type] && input != result[type + 1])
+        int choose1 = userChoiceType ? HALF_HOUR : HOUR;
+        int choose2 = userChoiceType ? HOUR : HOUR_HALF;
+
+        while(input != choose1 && input != choose2)
         {
             try {
-                System.out.printf("Would you prefer your reservation to be at %d or %d?", result[type], result[type + 1]);
+                System.out.printf("Would you prefer your reservation to be at %d or %d?", choose1,choose2);
                 input = scan.nextInt();
 
             }catch (InputMismatchException ime)
@@ -35,42 +41,57 @@ public class SpaReservation
     }
 
     /*
-        Customers can choose which type of a spa treatment they can choose
-        Note: they have to choose the right spa service before choosing the treatment
-    */
-    private static SpecialType specialityCare(String customerInput)
+       Customers can choose which type of a spa treatment they can choose
+       Note: they have to choose the right spa service before choosing the treatment
+   */
+    private static SpecialType specialMassageCare()
     {
-        if (customerInput.toLowerCase().equals("mineral bath"))
-            return null;
-
-        System.out.printf("Which type of %s would you like\n", customerInput.toLowerCase());
+        System.out.println("Which type of massage would you like?");
         String input = scan.next(); //Ask for their specific treatment
 
         switch (input.toUpperCase())
         {
             case "SWEDISH": case "SHIATSU": case "DEEP_TISSUE":
-                if(!customerInput.equals("MASSAGE"))
-                {
-                    System.out.println("Sorry it looks like you choose the wrong option");
-                    specialityCare(customerInput); //wrong input, go back
-                }
-                break;
-            case "NORMAL": case "COLLAGEN":
-                if(!customerInput.equals("FASCIALS"))
-                {
-                    System.out.println("Sorry it looks like you choose the wrong option");
-                    specialityCare(customerInput); //wrong input, go back
-                }
-            break;
-            case "HOT STONE": case "SUGAR SCRUB": case "HERBAL BODY WRAP": case "BOTANICAL MUD WRAP":
-                if(!customerInput.equals("SPECIAL TREATMENT"))
-                {
-                    System.out.println("Sorry it looks like you choose the wrong option");
-                    specialityCare(customerInput); //wrong input, go back
-                }
             break;
             default:
-                specialityCare(customerInput);
+                System.out.println("Sorry, there is no special care!");
+                specialMassageCare();
+        }
+
+        return SpecialType.valueOf(input);
+    }
+
+    private static SpecialType specialFacialCare()
+    {
+        System.out.println("Which type of facial would you like?");
+        String input = scan.next(); //Ask for their specific treatment
+
+        switch (input.toUpperCase())
+        {
+            case "NORMAL": case "COLLAGEN":
+            break;
+
+            default:
+                System.out.println("Sorry it looks like you choose the wrong option");
+                specialFacialCare(); //wrong input, go back
+        }
+
+        return SpecialType.valueOf(input);
+    }
+
+    private static SpecialType specialTreatmentCare()
+    {
+        System.out.println("Which type of special treatment would you like?");
+        String input = scan.next(); //Ask for their specific treatment
+
+        switch (input.toUpperCase())
+        {
+            case "HOT STONE": case "SUGAR SCRUB": case "HERBAL BODY WRAP": case "BOTANICAL MUD WRAP":
+            break;
+
+            default:
+                System.out.println("Sorry it looks like you choose the wrong option");
+                specialTreatmentCare();
         }
 
         return SpecialType.valueOf(input);
@@ -81,10 +102,27 @@ public class SpaReservation
     */
     public static Reservation spaServices(int start,String customerName,String spaTypeInput)
     {
-        SpaType spa = SpaType.valueOf(spaTypeInput);// Either massage, facial, special treatment, or bath
+        // Either massage, facial, special treatment, or bath
+        SpaType spa = SpaType.valueOf(spaTypeInput);
+        boolean spaTypeChoice = true;
+        SpecialType specialMassage = null;
 
-        switch (spaTypeInput){ //Ensures that it has a correct input
-            case "MASSAGE":case "FACIALS":case "SPECIAL TREATMENT": case "MINERAL BATH":
+        switch (spaTypeInput)
+        {
+            case "MASSAGE":
+                specialMassage = specialMassageCare();
+                break;
+
+            case "FACIALS":
+                specialMassage = specialFacialCare();
+                break;
+
+            case "SPECIAL TREATMENT":
+                specialMassage = specialTreatmentCare();
+
+            case "MINERAL BATH":
+                spaTypeChoice = false;
+
                 break;
             default:
                 System.out.println("Sorry something went wrong!");
@@ -92,10 +130,9 @@ public class SpaReservation
                 spaServices(start,customerName, scan.next() );
         }
 
-        int duration = chooseTimeDuration(spa.label.equals("FACIALS") || spa.label.equals("MASSAGE") ? 0 : 1);
-        SpecialType specialMassage = specialityCare(spaTypeInput);
+        int duration = chooseTimeDuration(spaTypeChoice);
 
-        return new Reservation(start,customerName,specialMassage,duration,spa.price);
+        return new Reservation(start,customerName,null,specialMassage,duration,spa.price);
     }
 
     /*
@@ -126,7 +163,8 @@ public class SpaReservation
         if view -> display the linked list of reservations
         if cancel -> remove from linked list and add on
     */
-    public static void main(String[]args)
+
+    /*public static void main(String[]args)
     {
         System.out.println("Hello, how can we help you");
         switch (scan.next())
@@ -146,8 +184,7 @@ public class SpaReservation
 
             default:
                 System.out.println("Sorry something went wrong!");
-        }
-    }
+        }*/
 
     /*
         Payment system for card payment
@@ -173,7 +210,7 @@ public class SpaReservation
         System.out.println("Would you like to save this for future visits?");
 
         if(scan.next().toLowerCase().equals("yes"))
-            customerFinancialInfo.add(new Banking(cardNum, cardExpMonth, cardExpYear, cvv));
+            //customerFinancialInfo.add(new Banking(cardNum, cardExpMonth, cardExpYear, cvv));
 
         System.out.printf("Amount paid to the card: %f",remainingBalance);
     }
@@ -272,12 +309,12 @@ public class SpaReservation
     */
     private static int[] getTime(String string)
     {
-        String[] time = string.split(" : ");
+        String[] time = string.split(":");
         int hour,min;
 
         try {
-            hour = Integer.getInteger(time[0]);
-            min = Integer.getInteger(time[1]);
+            hour = Integer.parseInt(time[0]);
+            min = Integer.parseInt(time[1]);
         }catch (NumberFormatException nfee)
         {
             System.out.println("Sorry we didn't detect any number associated with time.");
@@ -317,11 +354,13 @@ public class SpaReservation
         String temp;
 
         System.out.println("What type of spa would you like?");
+        for (SpaType spaType : SpaType.values())
+            System.out.print(spaType.label + " ");
         temp = scan.next();
 
         //if it found a spa type return
         for (SpaType spaType : SpaType.values())
-            if (spaType.label.equals(temp))
+            if (spaType.label.equals(temp.toUpperCase()))
                 return temp;
 
         // if not correct, return with recursion
@@ -382,6 +421,28 @@ public class SpaReservation
             System.out.println("Duration: " + a[i].getTime());
             System.out.println("\n");
         }
+    }
+
+    private static void displayAvailableTime()
+    {
+        int i = 0;
+        for (boolean b : availableTime)
+        {
+            if((i + 1) % 11 == 0) // add some indention
+                System.out.println();
+
+            if (!b)
+            {
+                int j = i /4,k = i % 4;
+                int hour = OPEN_TIME + j, min = HALF_HOUR * k;
+                System.out.print(hour + " : " + min);
+                System.out.print("\t");
+            }
+
+            i++;
+        }
+
+        System.out.println();
     }
 
     /*
