@@ -1,5 +1,4 @@
 package com.example.comp350;
-
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -20,6 +19,10 @@ public class HelloController {
 
         System.out.println("The Customer wants a " + whatKind + " at " + when);
 
+        /*
+            How to link SpaRerservation.java to this to make the button
+         */
+        //SpaReservation.makeSpaReservation();
     }
 /*
     @FXML
