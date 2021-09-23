@@ -24,13 +24,9 @@
                     <MenuItem mnemonicParsing="false" text="Set Reservation" />
                 </items>
             </MenuButton>
-            <MenuButton layoutX="879.0" layoutY="36.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="386.0" text="Services">
-                <items>
-                    <MenuItem mnemonicParsing="false" text="Action 1" />
-                    <MenuItem mnemonicParsing="false" text="Action 2" />
-                </items>
-            </MenuButton>
-            <Button layoutX="1265.0" layoutY="36.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="661.0" fx:id="aboutUsBtn" onAction="#aboutUsAction" text="About US" />
+            <Button layoutX="879.0" layoutY="36.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="386.0" fx:id="Bookingbtn" onAction="#bookingAction" text="Room"  />
+
+            <Button layoutX="1265.0" layoutY="36.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="661.0" fx:id="roomservicebtn" onAction="#roomServiceAction" text="About US" />
             <TextArea layoutX="502.0" layoutY="503.0" prefHeight="200.0" prefWidth="1323.0" text="About Us" />
         </children>
     </AnchorPane>
