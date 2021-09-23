@@ -28,7 +28,7 @@ public class SpaReservation
         while(input != choose1 && input != choose2)
         {
             try {
-                System.out.printf("Would you prefer your reservation to be at %d or %d?", choose1,choose2);
+                System.out.printf("Would you prefer your reservation to be at %d or %d?\n", choose1,choose2);
                 input = scan.nextInt();
 
             }catch (InputMismatchException ime)
@@ -47,9 +47,10 @@ public class SpaReservation
     private static SpecialType specialMassageCare()
     {
         System.out.println("Which type of massage would you like?");
-        String input = scan.next(); //Ask for their specific treatment
+        displaySpecialType(0,3);
+        String input = scan.next().toUpperCase(); //Ask for their specific treatment
 
-        switch (input.toUpperCase())
+        switch (input)
         {
             case "SWEDISH": case "SHIATSU": case "DEEP_TISSUE":
             break;
@@ -64,7 +65,8 @@ public class SpaReservation
     private static SpecialType specialFacialCare()
     {
         System.out.println("Which type of facial would you like?");
-        String input = scan.next(); //Ask for their specific treatment
+        displaySpecialType(3,5);
+        String input = scan.next().toUpperCase(); //Ask for their specific treatment
 
         switch (input.toUpperCase())
         {
@@ -82,7 +84,8 @@ public class SpaReservation
     private static SpecialType specialTreatmentCare()
     {
         System.out.println("Which type of special treatment would you like?");
-        String input = scan.next(); //Ask for their specific treatment
+        displaySpecialType(5,SpecialType.values().length);
+        String input = scan.next().toUpperCase(); //Ask for their specific treatment
 
         switch (input.toUpperCase())
         {
@@ -146,7 +149,7 @@ public class SpaReservation
         System.out.println("Please enter your name for the reservation");
         String name = scan.next();
 
-        Reservation newRes = spaServices(appointmentInput,name,spaTypeInput);
+        Reservation newRes = spaServices(appointmentInput,name,spaTypeInput.toUpperCase());
         markTime(appointmentInput,newRes.getTime());
         totalRes.add(newRes);
 
@@ -223,12 +226,13 @@ public class SpaReservation
     {
         while(remainingBalance > 0.0)
         {
-            System.out.println("Please input each bill one at a time");
+            System.out.print("Please input each bill one at a time\t");
+            System.out.printf("Remaining Balance: $%.2f\n",remainingBalance);
             remainingBalance -= scan.nextInt();
         }
 
         if (remainingBalance < 0.0) //give them back change
-            System.out.printf("Here is your change: %f", Math.abs(remainingBalance));
+            System.out.printf("Here is your change: $%.2f\n", Math.abs(remainingBalance));
     }
 
     /*
@@ -321,7 +325,7 @@ public class SpaReservation
             return null;
         }
 
-        if (!availableHours(hour))
+        if (closedHours(hour))
         {
             System.out.println("Sorry we didn't detect a valid hour.");
             return null;
@@ -354,8 +358,7 @@ public class SpaReservation
         String temp;
 
         System.out.println("What type of spa would you like?");
-        for (SpaType spaType : SpaType.values())
-            System.out.print(spaType.label + " ");
+        displaySpaType();
         temp = scan.next();
 
         //if it found a spa type return
@@ -369,9 +372,9 @@ public class SpaReservation
     }
 
 
-    private static boolean availableHours(int result)
+    private static boolean closedHours(int result)
     {
-        return result >= OPEN_TIME && result <= CLOSE_TIME;
+        return result < OPEN_TIME || result > CLOSE_TIME;
     }
 
     /*
@@ -391,7 +394,7 @@ public class SpaReservation
 
             result = time[0] + time[1];
 
-        }while(!availableHours(result) || temp.length() > MAX_TIME_LENGTH);
+        }while(closedHours(result) || temp.length() > MAX_TIME_LENGTH);
 
         if(result == OPEN_TIME && temp.endsWith("pm"))
             result += 12;
@@ -423,6 +426,37 @@ public class SpaReservation
         }
     }
 
+
+    private static String comma(int i, int j)
+    {
+        return (i == j ? " " : ", ");
+    }
+
+    /*
+        Displays all spa type
+    */
+    private static void displaySpaType()
+    {
+        int i = 0;
+        for (SpaType spaType : SpaType.values()) {
+            System.out.print(spaType.label + comma(i,SpaType.values().length - 1));
+            i++;
+        }
+        System.out.println();
+    }
+
+    private static void displaySpecialType(int start,int end) {
+        for(;start < end; start++)
+        {
+            SpecialType[] type = SpecialType.values();
+            System.out.print(type[start] + comma(start,end - 1));
+        }
+        System.out.println();
+    }
+
+    /*
+        Displays all available time
+    */
     private static void displayAvailableTime()
     {
         int i = 0;
@@ -433,8 +467,14 @@ public class SpaReservation
 
             if (!b)
             {
-                int j = i /4,k = i % 4;
+                int j = i /2,k = i % 2;
                 int hour = OPEN_TIME + j, min = HALF_HOUR * k;
+
+                if(min == HOUR_HALF) {
+                    hour++;
+                    min = HALF_HOUR;
+                }
+
                 System.out.print(hour + " : " + min);
                 System.out.print("\t");
             }
