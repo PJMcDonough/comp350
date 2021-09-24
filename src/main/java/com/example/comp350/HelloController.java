@@ -13,6 +13,8 @@ public class HelloController {
     }
     public Button Bookingbtn;
     public void bookingAction(){
+        Booking book = new Booking();
+        book.book();
 
 
     }
