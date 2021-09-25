@@ -9,7 +9,7 @@ public class HelloController {
     private Label welcomeText;
     @FXML
     public Button makeReservation;
-    public void onReservationClick()
+    public void onMakeReservationClick()
     {
         /*
         System.out.println("When and what kind?");
@@ -21,12 +21,14 @@ public class HelloController {
          */
         SpaReservation.makeSpaReservation();
     }
-/*
-    @FXML
-    protected void setMakeReservation()
-    {
 
-    }*/
+    @FXML
+    public void onViewReservationClick()
+    {
+        SpaReservation.displayReservation();
+    }
+
+    public void onRemoveReservationClick() {SpaReservation.removeReservation();}
 
     @FXML
     protected void onHelloButtonClick() {
