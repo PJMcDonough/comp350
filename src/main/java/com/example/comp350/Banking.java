@@ -1,3 +1,4 @@
+package com.example.comp350;
 public class Banking {
 
     private int cardNumber;
