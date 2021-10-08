@@ -44,10 +44,11 @@ public class HelloController {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
 
-    private void handleButtonAction(ActionEvent event)
+    @FXML
+    private void handleButtonAction(String name)
     {
         try{
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource("SecondWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(name));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
             stage.setTitle("Make Reservation");
@@ -59,4 +60,5 @@ public class HelloController {
             System.out.println("Can't load a new window");
         }
     }
+
 }

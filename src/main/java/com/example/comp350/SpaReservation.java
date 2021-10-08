@@ -14,6 +14,7 @@ public class SpaReservation
     public static boolean[] availableTime = new boolean[TIMES_OPEN]; // 12hrs available
     private static Scanner scan = new Scanner(System.in);
     private static LinkedList<Reservation> totalReservation = new LinkedList<>();
+    //private static SpaReservationSQL database = new SpaReservationSQL();
     public static double totalRevenue = 0;
 
     /*
@@ -154,6 +155,8 @@ public class SpaReservation
         //Managers can force edits
         if(!checkTime(newRes.getStartTime(),newRes.getTime(),managerMode))
             removeReservation(newRes);
+
+        //database
     }
 
     /*
@@ -454,6 +457,9 @@ public class SpaReservation
              System.out.println("Sorry there are no available reservations");
              System.out.println("\n");
          }
+
+         //Reading from database
+         //database
     }
 
     private static String customerResponse(String input)
