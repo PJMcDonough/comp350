@@ -20,7 +20,7 @@
             <Accordion layoutX="6.0" layoutY="162.0" />
             <MenuButton layoutX="481.0" layoutY="36.0" mnemonicParsing="false" prefHeight="38.0" prefWidth="398.0" text="Reservation">
                 <items>
-                    <MenuItem mnemonicParsing="false" text="My Reservations" onAction="#handleButtonAction('make-reservation-page.fxml')"/>
+                    <MenuItem mnemonicParsing="false" text="My Reservations" onAction="#handleButtonAction"/>
                     <MenuItem mnemonicParsing="false" text="Set Reservation" onAction="#onMakeReservationClick"/>
                     <MenuItem mnemonicParsing="false" text="Remove Reservation" onAction="#onRemoveReservationClick"/>
                 </items>

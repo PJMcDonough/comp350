@@ -11,6 +11,7 @@ import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
+import java.sql.SQLException;
 import java.util.Scanner;
 
 public class HelloController {
@@ -18,8 +19,7 @@ public class HelloController {
     private Label welcomeText;
     @FXML
     public Button makeReservation;
-    public void onMakeReservationClick()
-    {
+    public void onMakeReservationClick() throws SQLException {
         /*
         System.out.println("When and what kind?");
         Scanner testing = new Scanner(System.in);
@@ -32,12 +32,11 @@ public class HelloController {
     }
 
     @FXML
-    public void onViewReservationClick()
-    {
+    public void onViewReservationClick() throws SQLException {
         SpaReservation.displayReservation();
     }
 
-    public void onRemoveReservationClick() {SpaReservation.removeReservation();}
+    public void onRemoveReservationClick() throws SQLException {SpaReservation.removeReservation();}
 
     @FXML
     protected void onHelloButtonClick() {
@@ -45,9 +44,10 @@ public class HelloController {
     }
 
     @FXML
-    private void handleButtonAction(String name)
+    private void handleButtonAction()
     {
         try{
+            String name = "make-reservation-page.fxml";
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(name));
             Parent root1 = fxmlLoader.load();
             Stage stage = new Stage();
