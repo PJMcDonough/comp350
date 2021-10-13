@@ -1,4 +1,5 @@
 package com.example.comp350;
+import java.sql.SQLException;
 import java.util.*;
 //import java.sql.*;//FOR SQL STUFF?
 public class SpaReservation
@@ -14,6 +15,7 @@ public class SpaReservation
     public static boolean[] availableTime = new boolean[TIMES_OPEN]; // 12hrs available
     private static Scanner scan = new Scanner(System.in);
     private static LinkedList<Reservation> totalReservation = new LinkedList<>();
+    private static SpaReservationSQL database;
     public static double totalRevenue = 0;
 
     /*
@@ -141,8 +143,7 @@ public class SpaReservation
     /*
         Customers can add reservation or manager can manipulate to add reservations
     */
-    public static void addReservation(double appointment, String spaType,String name,boolean managerMode)
-    {
+    public static Reservation addReservation(double appointment, String spaType,String name,boolean managerMode) {
         //Manager can try to add here
         //Note: start time = 3.5 => 3:30  &  duration = 30 => half an hour
         Reservation newRes = spaServices(appointment,name,spaType);
@@ -154,21 +155,26 @@ public class SpaReservation
         //Managers can force edits
         if(!checkTime(newRes.getStartTime(),newRes.getTime(),managerMode))
             removeReservation(newRes);
+
+        return newRes;
     }
 
     /*
         Customers can make their reservation
     */
-    public static void makeSpaReservation()
+    public static void makeSpaReservation() throws SQLException
     {
         double appointmentInput = makeAppointment();
         String spaTypeInput = selectingSpaType();
 
         System.out.println("Please enter your name for the reservation");
-        String name = scan.next();
+        String fName = scan.next(), lName = scan.next();
 
         //Customer wants to make the spa reservation
-       addReservation(appointmentInput,spaTypeInput.toUpperCase(),name,false);
+       Reservation temp = addReservation(appointmentInput,spaTypeInput.toUpperCase(),fName.concat(" " + lName),false);
+
+       //adds a new reservation into the database
+       database.getInsertionCustomerOp(fName,lName,temp.getStartTime(),(temp.getStartTime() + temp.getTime()));
     }
 
     private static int[] cardInfo()
@@ -358,8 +364,7 @@ public class SpaReservation
         Removes the given reservation from the list
         Note: uses both find's to find it and erase it
     */
-    public static void removeReservation()
-    {
+    public static void removeReservation() throws SQLException {
         String input;
 
         if(totalReservation.isEmpty()) //Send customers to make a reservation if there are no reservations
@@ -433,8 +438,8 @@ public class SpaReservation
     /*
        Displays each customer's info
     */
-    public static void displayReservation()
-     {
+    public static void displayReservation() throws SQLException
+    {
          try{
              Reservation[] a = (Reservation[]) totalReservation.toArray();
 
@@ -454,6 +459,9 @@ public class SpaReservation
              System.out.println("Sorry there are no available reservations");
              System.out.println("\n");
          }
+
+         //Reading from database
+         //database.useDatabase("VIEW","NAME", new String[]{""});
     }
 
     private static String customerResponse(String input)
