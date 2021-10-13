@@ -1,4 +1,6 @@
-import Guest from comp350;
+/*
+package com.example.comp350;
+
 import java.util.Scanner;
 // rooms available (key:number of room, Value: True if its available)
 public class GuestBooking {
@@ -52,4 +54,4 @@ public class GuestBooking {
         }
         return room;
     }
-}
+}*/
