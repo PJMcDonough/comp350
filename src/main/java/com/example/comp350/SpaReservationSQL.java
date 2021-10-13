@@ -58,7 +58,7 @@ public class SpaReservationSQL {
         }
     }
 
-    public void getOperationName(String op, String FirstName, String LastName) throws SQLException {
+    public static void getOperationName(String op, String FirstName, String LastName) throws SQLException {
         SpaReservationSQLRemove removeSQL = new SpaReservationSQLRemove(conn);
 
         switch (op.toUpperCase())
@@ -75,8 +75,8 @@ public class SpaReservationSQL {
         }
     }
 
-    public static void main(String[] args) {
-        getInsertionOperation();
+    public static void main(String[] args) throws SQLException {
+        getOperationName("REMOVE CUSTOMER","Israel","Alonso");
     }
 
     public void getOperationTime(String op, double time) throws SQLException
