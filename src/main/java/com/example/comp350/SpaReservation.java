@@ -365,7 +365,6 @@ public class SpaReservation
         Note: uses both find's to find it and erase it
     */
     public static void removeReservation() throws SQLException {
-        String input;
 
         if(totalReservation.isEmpty()) //Send customers to make a reservation if there are no reservations
         {
@@ -379,12 +378,19 @@ public class SpaReservation
 
         System.out.println("Please enter your time, or your name"); // your ID number,
         Reservation res;
-        if((res = findName(input = scan.next())) != null
-                || (res = findTime(input)) != null)
-        {
-            decrementRevenue(res);
-            totalReservation.remove(res);
-        }
+        String input = scan.next();
+
+        if((res = findName(input)) != null)
+            database.getOperationName("REMOVE CUSTOMER",res.getName());
+
+        if ((res = findTime(input)) != null)
+            database.getOperationTime("REMOVE",res.getStartTime());
+
+        if (res == null) // if none found do nothing
+            return;
+
+        totalReservation.remove(res);
+        decrementRevenue(res);
     }
 
     /*
@@ -438,10 +444,10 @@ public class SpaReservation
     /*
        Displays each customer's info
     */
-    public static void displayReservation() throws SQLException
+    public static void displayReservation()
     {
          try{
-             Reservation[] a = (Reservation[]) totalReservation.toArray();
+             /*Reservation[] a = (Reservation[]) totalReservation.toArray();
 
             for(int i = 0; i < a.length; i++)
             {
@@ -453,15 +459,19 @@ public class SpaReservation
                 System.out.println("Starting Time: " + a[i].getStartTime());
                 System.out.println("Duration: " + a[i].getTime());
                 System.out.println("\n");
-            }
+            }*/
+            //Reading from database
+             database.getViewOperation("NAME");
          }catch (ClassCastException cce)
          {
              System.out.println("Sorry there are no available reservations");
              System.out.println("\n");
+         }catch (SQLException se){
+             System.out.println("Sorry there are no available reservations in the database");
+             System.out.println("\n");
          }
 
-         //Reading from database
-         //database.useDatabase("VIEW","NAME", new String[]{""});
+
     }
 
     private static String customerResponse(String input)

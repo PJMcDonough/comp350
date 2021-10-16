@@ -26,10 +26,9 @@ public class SpaReservationSQL {
         }
     }
 
-    /*public void getInsertionEmployeeOp(String fName, String lName, String jobType,int payroll)
-    {
-        new SpaReservationSQLInsertion(statement,conn).insertNewEmployee();
-    }*/
+    public void getInsertionEmployeeOp(String fName, String lName, String jobType, int payroll,int spaId) throws SQLException {
+        new SpaReservationSQLInsertion(statement,conn).insertNewEmployee(fName,lName,jobType,payroll,spaId);
+    }
 
     public void getInsertionCustomerOp(String fName, String lName, double sTime, double eTime) throws SQLException {
         new SpaReservationSQLInsertion(statement,conn).insertSpaReservationSQL(fName,lName,sTime,eTime);
@@ -58,8 +57,11 @@ public class SpaReservationSQL {
         }
     }
 
-    public static void getOperationName(String op, String FirstName, String LastName) throws SQLException {
+    public void getOperationName(String op, String FullName) throws SQLException {
         SpaReservationSQLRemove removeSQL = new SpaReservationSQLRemove(conn);
+
+        String[] name = FullName.split(" ");
+        String FirstName = name[0] , LastName = name[1];
 
         switch (op.toUpperCase())
         {
@@ -76,7 +78,7 @@ public class SpaReservationSQL {
     }
 
     public static void main(String[] args) throws SQLException {
-        getOperationName("REMOVE CUSTOMER","Israel","Alonso");
+        //getOperationName("REMOVE CUSTOMER","Israel","Alonso");
     }
 
     public void getOperationTime(String op, double time) throws SQLException

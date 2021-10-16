@@ -43,15 +43,15 @@ public class HelloController {
     protected void onHelloButtonClick() {
         welcomeText.setText("Welcome to JavaFX Application!");
     }
-    public Button Bookingbtn;
-    public void bookingAction(){
+    /*public Button Bookingbtn;
+    public void bookingAction() {
         Booking book = new Booking();
         book.book();
-
+    }*/
     @FXML
-    private void handleButtonAction()
+    private void handleButtonAction ()
     {
-        try{
+        try {
             String name = "make-reservation-page.fxml";
             FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(name));
             Parent root1 = fxmlLoader.load();
@@ -60,10 +60,8 @@ public class HelloController {
             stage.setScene(new Scene(root1));
             stage.show();
 
-        }catch (Exception e)
-        {
+        } catch (Exception e) {
             System.out.println("Can't load a new window");
         }
     }
-
 }
