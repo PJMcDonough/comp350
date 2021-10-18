@@ -32,7 +32,7 @@ public class HelloController {
     }
 
     @FXML
-    public void onViewReservationClick() throws SQLException {
+    public void onViewReservationClick() {
         SpaReservation.displayReservation();
     }
 
@@ -71,8 +71,6 @@ public class HelloController {
             System.out.println("Can't load a new window");
         }
     }
-
-
 
     @FXML
     private void handleButtonActionForMake (ActionEvent event)
@@ -117,7 +115,7 @@ public class HelloController {
     {
         try {
             String name = "special-treatment-page.fxml";
-            String title = "Facial";
+            String title = "Special Treatment";
             makePage(name, title,event);
 
         } catch (Exception e) {
