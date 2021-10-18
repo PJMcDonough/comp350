@@ -28,14 +28,6 @@ public class HelloController {
     @FXML
     public Button makeReservation;
     public void onMakeReservationClick() throws SQLException {
-        /*
-        System.out.println("When and what kind?");
-        Scanner testing = new Scanner(System.in);
-        String when = testing.next();
-        String whatKind = testing.next();
-
-        System.out.println("The Customer wants a " + whatKind + " at " + when);
-         */
         SpaReservation.makeSpaReservation();
     }
 
@@ -80,12 +72,52 @@ public class HelloController {
         }
     }
 
+
+
     @FXML
     private void handleButtonActionForMake (ActionEvent event)
     {
         try {
             String name = "make-reservation-page.fxml";
             String title = "Make Reservation";
+            makePage(name, title,event);
+
+        } catch (Exception e) {
+            System.out.println("Can't load a new window");
+        }
+    }
+
+    @FXML
+    private void buttonForMassage(ActionEvent event)
+    {
+        try {
+            String name = "massage-page.fxml";
+            String title = "Massage";
+            makePage(name, title,event);
+
+        } catch (Exception e) {
+            System.out.println("Can't load a new window");
+        }
+    }
+    @FXML
+    private void buttonForFacial(ActionEvent event)
+    {
+        try {
+            String name = "facial-page.fxml";
+            String title = "Facial";
+            makePage(name, title,event);
+
+        } catch (Exception e) {
+            System.out.println("Can't load a new window");
+        }
+    }
+
+    @FXML
+    private void buttonForSpecialTreat(ActionEvent event)
+    {
+        try {
+            String name = "special-treatment-page.fxml";
+            String title = "Facial";
             makePage(name, title,event);
 
         } catch (Exception e) {
