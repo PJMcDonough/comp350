@@ -21,12 +21,9 @@ public class SpaReservation
     /*
         Customers can choose a time duration from 3 options: 30 ,60, 90 mins
     */
-    private static int chooseTimeDuration(boolean userChoiceType)
+    private static int chooseTimeDuration(int choose1,int choose2)
     {
         int input = 0;
-
-        int choose1 = userChoiceType ? HALF_HOUR : HOUR;
-        int choose2 = userChoiceType ? HOUR : HOUR_HALF;
 
         while(input != choose1 && input != choose2)
         {
@@ -47,45 +44,45 @@ public class SpaReservation
        Customers can choose which type of a spa treatment they can choose
        Note: they have to choose the right spa service before choosing the treatment
    */
-    private static SpecialType specialMassageCare()
+    private static SpecialType specialMassageCare(String input)
     {
-        //Ask for their specific treatment
-        String input = customerResponse("massage specials").toUpperCase();
+//        //Ask for their specific treatment
+//        String input = customerResponse("massage specials").toUpperCase();
 
         switch (input)
         {
             case "SWEDISH": case "SHIATSU": case "DEEP_TISSUE":
             break;
-            default:
-                System.out.println("Sorry, there is no special care!");
-                specialMassageCare();
+//            default:
+//                System.out.println("Sorry, there is no special care!");
+//                specialMassageCare(specificTypeInput);
         }
 
         return SpecialType.valueOf(input);
     }
 
-    private static SpecialType specialFacialCare()
+    private static SpecialType specialFacialCare(String input)
     {
         //Ask for their specific treatment
-        String input = customerResponse("facial specials").toUpperCase();
+        // String input = customerResponse("facial specials").toUpperCase();
 
         switch (input)
         {
             case "NORMAL": case "COLLAGEN":
             break;
 
-            default:
-                System.out.println("Sorry it looks like you choose the wrong option");
-                specialFacialCare(); //wrong input, go back
+//            default:
+//                System.out.println("Sorry it looks like you choose the wrong option");
+//                specialFacialCare(); //wrong input, go back
         }
 
         return SpecialType.valueOf(input);
     }
 
-    private static SpecialType specialTreatmentCare()
+    private static SpecialType specialTreatmentCare(String input)
     {
-        //Ask for their specific treatment
-        String input = customerResponse("special treatment specials").toUpperCase();
+//        //Ask for their specific treatment
+//        String input = customerResponse("special treatment specials").toUpperCase();
 
         switch (input.toUpperCase())
         {
@@ -93,9 +90,9 @@ public class SpaReservation
                 case "HERBAL BODY WRAP": case "BOTANICAL MUD WRAP":
             break;
 
-            default:
+           /* default:
                 System.out.println("Sorry it looks like you choose the wrong option");
-                specialTreatmentCare();
+                specialTreatmentCare();*/
         }
 
         return SpecialType.valueOf(input);
@@ -104,7 +101,7 @@ public class SpaReservation
     /*
         Customers can choose which spa service they can choose from the 4
     */
-    private static Reservation spaServices(double start,String customerName,String spaTypeInput)
+    public static Reservation spaServices(double start,String customerName,String spaTypeInput,String specificTypeInput)
     {
         // Either massage, facial, special treatment, or bath
         SpaType spa = SpaType.valueOf(spaTypeInput);
@@ -114,15 +111,15 @@ public class SpaReservation
         switch (spaTypeInput)
         {
             case "MASSAGE":
-                specialMassage = specialMassageCare();
+                specialMassage = specialMassageCare(specificTypeInput);
                 break;
 
             case "FACIALS":
-                specialMassage = specialFacialCare();
+                specialMassage = specialFacialCare(specificTypeInput);
                 break;
 
             case "SPECIAL TREATMENT":
-                specialMassage = specialTreatmentCare();
+                specialMassage = specialTreatmentCare(specificTypeInput);
 
             case "MINERAL BATH":
                 spaTypeChoice = false;
@@ -130,14 +127,14 @@ public class SpaReservation
 
             default:
                 System.out.println("Sorry something went wrong!");
-                System.out.println("Please input your spa type");
-                spaServices(start,customerName, scan.next() );
+               /* System.out.println("Please input your spa type");
+                spaServices(start,customerName, scan.next() );*/
         }
 
         System.out.println();
-        int duration = chooseTimeDuration(spaTypeChoice);
+        int duration = chooseTimeDuration(spaTypeChoice ? HALF_HOUR : HOUR, spaTypeChoice ? HOUR : HOUR_HALF);
 
-        return new Reservation(start,customerName,SpaType.valueOf(spaTypeInput),null,specialMassage,duration,spa.price);
+        return new Reservation(start,customerName,spa,null,specialMassage,duration,spa.price);
     }
 
     /*
@@ -146,7 +143,7 @@ public class SpaReservation
     public static Reservation addReservation(double appointment, String spaType,String name,boolean managerMode) {
         //Manager can try to add here
         //Note: start time = 3.5 => 3:30  &  duration = 30 => half an hour
-        Reservation newRes = spaServices(appointment,name,spaType);
+        Reservation newRes = spaServices(appointment,name,spaType,"");
         markTime(appointment,newRes.getTime());
         totalReservation.add(newRes);
         makePayment(newRes);
