@@ -20,7 +20,6 @@
 
             <!-- Options in Massage -->
             <Text layoutX="270.0" layoutY="300.0" text="Massage Types:"> </Text>
-<<<<<<< HEAD
             <Button layoutX="270.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Swedish" onAction="#buttonForM1"/>
             <Button layoutX="440.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Shiatsu" onAction="#buttonForM2"/>
             <Button layoutX="610.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Deep Tissue" onAction="#buttonForM3"/>
@@ -33,14 +32,6 @@
             <!-- Cancellation/Submit Button  -->
             <Button layoutX="950.0" layoutY="150.0" prefHeight="25.0" prefWidth="100.0" text="Cancel" onAction="#handleButtonActionForMake"/>
             <Button layoutX="900.0" layoutY="750.0" prefHeight="25.0" prefWidth="100.0" text="Submit" onAction="#handleButtonActionForSubmit"/>
-=======
-            <Button layoutX="270.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Swedish"/>
-            <Button layoutX="440.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Shiatsu" />
-            <Button layoutX="610.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Deep Tissue"/>
-
-            <!-- Cancellation Button  -->
-            <Button layoutX="950.0" layoutY="100.0" prefHeight="25.0" prefWidth="100.0" text="Cancel" onAction="#handleButtonActionForMake"/>
->>>>>>> fdb8441 (cnnection)
 
         </children>
     </AnchorPane>

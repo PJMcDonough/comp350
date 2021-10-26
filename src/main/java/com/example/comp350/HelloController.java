@@ -13,7 +13,6 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class HelloController {
-
     public String spa;
     private String spaType;
     private double time;
@@ -96,27 +95,33 @@ public class HelloController {
         } catch (Exception e) {
             System.out.println("Can't load a new window");
         }
+
     }
 
     @FXML
+    //added new stuff here
+    //sets the varible names for the new pane
     private void buttonForM1()
     {
         this.spa = "MASSAGE";
-        this.spaType = "Swedish";
+        this.spaType = "Swedish".toUpperCase();
     }
 
     @FXML
+    //added new stuff here
+    //sets the varible names for the new pane
     private void buttonForM2()
     {
         this.spa = "MASSAGE";
-        this.spaType = "Shiatsu";
+        this.spaType = "Shiatsu".toUpperCase();
     }
 
     @FXML
+    //addded new stuff here
     private void buttonForM3()
     {
         this.spa = "MASSAGE";
-        this.spaType = "Deep Tissue";
+        this.spaType = "Deep Tissue".toUpperCase();
     }
 
 
@@ -231,7 +236,7 @@ public class HelloController {
     private void handleButtonActionForSubmit (ActionEvent event)
     {
         System.out.println(this.spa == null ? "DID NOT SHOW": "DID SHOW");
-        Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
+        //Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
         try {
             String name = "payment-page.fxml";
             String title = "Payment";
@@ -240,7 +245,7 @@ public class HelloController {
             //Replaces existing window
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             stage.setTitle(title);
-
+            //save these to name values
             variable(290,370);
 
             /*Group group = new Group(variableLabel);
