@@ -15,138 +15,63 @@ public class SpaReservation
     public static boolean[] availableTime = new boolean[TIMES_OPEN]; // 12hrs available
     private static Scanner scan = new Scanner(System.in);
     private static LinkedList<Reservation> totalReservation = new LinkedList<>();
-    private static SpaReservationSQL database;
     public static double totalRevenue = 0;
 
+
     /*
-        Customers can choose a time duration from 3 options: 30 ,60, 90 mins
+        Made considerable changes for the JavaFx usage, most would not run on JavaFx page
     */
-    private static int chooseTimeDuration(boolean userChoiceType)
+
+    private static boolean closedHours(int result)
     {
-        int input = 0;
-
-        int choose1 = userChoiceType ? HALF_HOUR : HOUR;
-        int choose2 = userChoiceType ? HOUR : HOUR_HALF;
-
-        while(input != choose1 && input != choose2)
-        {
-            try {
-                System.out.printf("Would you prefer your reservation to be at %d or %d?\n", choose1,choose2);
-                input = scan.nextInt();
-
-            }catch (InputMismatchException ime)
-            {
-                System.out.println("Sorry you didn't select a correct number can you try again");
-            }
-        }
-
-        return input;
+        return result < OPEN_TIME || result > CLOSE_TIME;
     }
 
     /*
-       Customers can choose which type of a spa treatment they can choose
-       Note: they have to choose the right spa service before choosing the treatment
-   */
-    private static SpecialType specialMassageCare()
-    {
-        //Ask for their specific treatment
-        String input = customerResponse("massage specials").toUpperCase();
-
-        switch (input)
-        {
-            case "SWEDISH": case "SHIATSU": case "DEEP_TISSUE":
-            break;
-            default:
-                System.out.println("Sorry, there is no special care!");
-                specialMassageCare();
-        }
-
-        return SpecialType.valueOf(input);
-    }
-
-    private static SpecialType specialFacialCare()
-    {
-        //Ask for their specific treatment
-        String input = customerResponse("facial specials").toUpperCase();
-
-        switch (input)
-        {
-            case "NORMAL": case "COLLAGEN":
-            break;
-
-            default:
-                System.out.println("Sorry it looks like you choose the wrong option");
-                specialFacialCare(); //wrong input, go back
-        }
-
-        return SpecialType.valueOf(input);
-    }
-
-    private static SpecialType specialTreatmentCare()
-    {
-        //Ask for their specific treatment
-        String input = customerResponse("special treatment specials").toUpperCase();
-
-        switch (input.toUpperCase())
-        {
-            case "HOT STONE": case "SUGAR SCRUB":
-                case "HERBAL BODY WRAP": case "BOTANICAL MUD WRAP":
-            break;
-
-            default:
-                System.out.println("Sorry it looks like you choose the wrong option");
-                specialTreatmentCare();
-        }
-
-        return SpecialType.valueOf(input);
-    }
-
-    /*
-        Customers can choose which spa service they can choose from the 4
+        Customers can choose which spa service they can choose from the 4 (HIGHLIGHT: For JavaFx)
     */
-    private static Reservation spaServices(double start,String customerName,String spaTypeInput)
-    {
+    public static Reservation spaServices(double start,String customerName,String spaTypeInput,String specificTypeInput,double duration) {
         // Either massage, facial, special treatment, or bath
-        SpaType spa = SpaType.valueOf(spaTypeInput);
-        boolean spaTypeChoice = true;
-        SpecialType specialMassage = null;
-
-        switch (spaTypeInput)
+        if(spaTypeInput == null)
         {
-            case "MASSAGE":
-                specialMassage = specialMassageCare();
-                break;
-
-            case "FACIALS":
-                specialMassage = specialFacialCare();
-                break;
-
-            case "SPECIAL TREATMENT":
-                specialMassage = specialTreatmentCare();
-
-            case "MINERAL BATH":
-                spaTypeChoice = false;
-                break;
-
-            default:
-                System.out.println("Sorry something went wrong!");
-                System.out.println("Please input your spa type");
-                spaServices(start,customerName, scan.next() );
+            System.out.println("Sorry looks like the spaTypeInput is null");
+            return null;
         }
 
-        System.out.println();
-        int duration = chooseTimeDuration(spaTypeChoice);
+        if(specificTypeInput == null)
+        {
+            System.out.println("Sorry looks like the specificInput is null");
+            return null;
+        }
 
-        return new Reservation(start,customerName,SpaType.valueOf(spaTypeInput),null,specialMassage,duration,spa.price);
+        if(customerName == null)
+        {
+            System.out.println("Sorry looks like the custerName is null");
+            return null;
+        }
+
+
+        SpaType spa = SpaType.valueOf(spaTypeInput);
+        SpecialType specialMassage = SpecialType.valueOf(specificTypeInput);
+
+        try {
+            //adds a new reservation into the database
+            new SpaReservationSQL().getInsertionCustomerOp(customerName, " ", start, start + duration);
+        }catch (Exception e)
+        {
+            System.out.println("Sorry couldn't add to database");
+        }
+
+        return new Reservation(start,customerName,spa,null,specialMassage, (int) duration,spa.price);
     }
 
     /*
-        Customers can add reservation or manager can manipulate to add reservations
+        Customers can add reservation or manager can manipulate to add reservations (Terminal Use)
     */
     public static Reservation addReservation(double appointment, String spaType,String name,boolean managerMode) {
         //Manager can try to add here
         //Note: start time = 3.5 => 3:30  &  duration = 30 => half an hour
-        Reservation newRes = spaServices(appointment,name,spaType);
+        Reservation newRes = spaServices(appointment,name,spaType,"",0.0);
         markTime(appointment,newRes.getTime());
         totalReservation.add(newRes);
         makePayment(newRes);
@@ -160,7 +85,7 @@ public class SpaReservation
     }
 
     /*
-        Customers can make their reservation
+        Customers can make their reservation (Terminal Use)
     */
     public static void makeSpaReservation() throws SQLException
     {
@@ -174,7 +99,7 @@ public class SpaReservation
        Reservation temp = addReservation(appointmentInput,spaTypeInput.toUpperCase(),fName.concat(" " + lName),false);
 
        //adds a new reservation into the database
-       database.getInsertionCustomerOp(fName,lName,temp.getStartTime(),(temp.getStartTime() + temp.getTime()));
+       new SpaReservationSQL().getInsertionCustomerOp(fName,lName,temp.getStartTime(),(temp.getStartTime() + temp.getTime()));
     }
 
     private static int[] cardInfo()
@@ -199,7 +124,7 @@ public class SpaReservation
     }
 
     /*
-        Payment system for card payment
+        Payment system for card payment (Terminal Use)
     */
     private static void cardPayment(double remainingBalance,int index)
     {
@@ -214,7 +139,7 @@ public class SpaReservation
 
     /*
         Payment system for cash payment
-        Note: decreases over the remaining balance
+        Note: decreases over the remaining balance (Terminal Use)
     */
     private static void cashPayment(double remainingBalance)
     {
@@ -230,7 +155,7 @@ public class SpaReservation
     }
 
     /*
-        Customers can choose which form of payment
+        Customers can choose which form of payment (Terminal Use)
     */
     private static void makePayment(Reservation appointment) {
 
@@ -362,7 +287,7 @@ public class SpaReservation
 
     /*
         Removes the given reservation from the list
-        Note: uses both find's to find it and erase it
+        Note: uses both find's to find it and erase it (Terminal Use)
     */
     public static void removeReservation() throws SQLException {
 
@@ -381,10 +306,10 @@ public class SpaReservation
         String input = scan.next();
 
         if((res = findName(input)) != null)
-            database.getOperationName("REMOVE CUSTOMER",res.getName());
+            new SpaReservationSQL().getOperationName("REMOVE CUSTOMER",res.getName());
 
         if ((res = findTime(input)) != null)
-            database.getOperationTime("REMOVE",res.getStartTime());
+            new SpaReservationSQL().getOperationTime("REMOVE",res.getStartTime());
 
         if (res == null) // if none found do nothing
             return;
@@ -394,7 +319,7 @@ public class SpaReservation
     }
 
     /*
-        Uses user input to find the spa service, repeats until it finds the spa service
+        Uses user input to find the spa service, repeats until it finds the spa service (Terminal Use)
     */
     private static String selectingSpaType()
     {
@@ -408,12 +333,6 @@ public class SpaReservation
         // if not correct, return with recursion
         System.out.println("Sorry your spa request is invalid!\n");
         return selectingSpaType();
-    }
-
-
-    private static boolean closedHours(int result)
-    {
-        return result < OPEN_TIME || result > CLOSE_TIME;
     }
 
     /*
@@ -446,31 +365,44 @@ public class SpaReservation
     */
     public static void displayReservation()
     {
-         try{
-             /*Reservation[] a = (Reservation[]) totalReservation.toArray();
+        try{
+                 /*Reservation[] a = (Reservation[]) totalReservation.toArray();
 
-            for(int i = 0; i < a.length; i++)
-            {
-                System.out.println("Customer: " + (1+i) );
-                System.out.println("Name: " + a[i].getName());
-                System.out.println("Price: " + a[i].getPrice());
-                System.out.println("Spa: " + a[i].getSpa());
-                System.out.println("Special: " + a[i].getSpecial().label);
-                System.out.println("Starting Time: " + a[i].getStartTime());
-                System.out.println("Duration: " + a[i].getTime());
-                System.out.println("\n");
-            }*/
+                for(int i = 0; i < a.length; i++)
+                {
+                    System.out.println("Customer: " + (1+i) );
+                    System.out.println("Name: " + a[i].getName());
+                    System.out.println("Price: " + a[i].getPrice());
+                    System.out.println("Spa: " + a[i].getSpa());
+                    System.out.println("Special: " + a[i].getSpecial().label);
+                    System.out.println("Starting Time: " + a[i].getStartTime());
+                    System.out.println("Duration: " + a[i].getTime());
+                    System.out.println("\n");
+                }*/
             //Reading from database
-             database.getViewOperation("NAME");
-         }catch (ClassCastException cce)
-         {
-             System.out.println("Sorry there are no available reservations");
-             System.out.println("\n");
-         }catch (SQLException se){
-             System.out.println("Sorry there are no available reservations in the database");
-             System.out.println("\n");
-         }
+            new SpaReservationSQL().getViewOperation("NAME");
+        }catch (ClassCastException cce)
+        {
+            System.out.println("Sorry there are no available reservations");
+            System.out.println("\n");
+        }catch (SQLException se){
+            System.out.println("Sorry there are no available reservations in the database");
+            System.out.println("\n");
+        }
+    }
 
+    /*
+       Displays specified customer's info
+    */
+    public static String displayReservation(Reservation reservation)
+    {
+        return //"Customer: " +
+                "Name: " + reservation.getName() + "\n" +
+                "Price: " + reservation.getPrice() + "\n" +
+                "Spa: " + reservation.getSpa() + "\n" +
+                "Special: " +reservation.getSpecial() + "\n" +
+                "Starting Time: " + reservation.getStartTime() + "\n" +
+                "Duration: " + reservation.getTime() + "\n\n";
 
     }
 
@@ -559,11 +491,6 @@ public class SpaReservation
             int j = i /2;
             int hour = OPEN_TIME + j, min = i % 2;
 
-            /*if(min > 0) {
-                hour++;
-                min = HALF_HOUR;
-            }*/
-
             System.out.printf("%d:%s" ,hour,min == 0 ? "00":"30");
             System.out.print("\t");
 
@@ -608,5 +535,13 @@ public class SpaReservation
             }
         return result;
     }
+
+   /* private static void importTimeFromDatabase()
+    {
+        try{
+
+            String database = new SpaReservationSQLDisplay().displayCustomerUnavailable();
+        }
+    }*/
 
 }

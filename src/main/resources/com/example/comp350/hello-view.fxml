@@ -29,6 +29,8 @@
 
             <!-- Title -->
             <Text layoutX="250.0" layoutY="150.0" text="Home"> </Text>
+            <Text layoutX="300.0" layoutY="200.0" text="Hello Welcome to MiYi"> </Text>
+
         </children>
     </AnchorPane>
 </VBox>
