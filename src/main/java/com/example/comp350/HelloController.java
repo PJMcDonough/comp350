@@ -21,10 +21,10 @@ import java.util.Scanner;
 
 public class HelloController {
 
-    private String spa;
+    public String spa;
     private String spaType;
     private double time;
-    private String name = "IA";
+    private String name;
     private double duration;
 
     public void makePage(String fxml, String title, ActionEvent event) throws IOException
@@ -34,8 +34,7 @@ public class HelloController {
         //Replaces existing window
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle(title);
-        int HEIGHT = 1920;
-        int WIDTH = 1080;
+        int HEIGHT = 1920, WIDTH = 1080;
         stage.setScene(new Scene(root1, HEIGHT, WIDTH));
         stage.show();
     }
@@ -56,11 +55,11 @@ public class HelloController {
     private void handleButtonActionForMake (ActionEvent event)
     {
         //if Cancelled, resets their input
-        spaType = "";
+        /*spaType = "";
         spa = "";
         time = 0.0;
         name = "";
-        duration = 0;
+        duration = 0;*/
 
         try {
             String name = "make-reservation-page.fxml";
@@ -75,18 +74,18 @@ public class HelloController {
     @FXML
     private void buttonForTime1()
     {
-        duration = .5;
+        this.duration = .5;
     }
 
     @FXML
     private void buttonForTime2()
     {
-        duration = 1.0;
+        this.duration = 1.0;
     }
     @FXML
     private void buttonForTime3()
     {
-        duration = 1.5;
+        this.duration = 1.5;
     }
 
 
@@ -96,8 +95,10 @@ public class HelloController {
         try {
             String name = "massage-page.fxml";
             String title = "Massage";
+            this.spa = title.toUpperCase();
+            System.out.println(this.spa);
             makePage(name, title,event);
-            spa = title.toUpperCase();
+
 
         } catch (Exception e) {
             System.out.println("Can't load a new window");
@@ -107,19 +108,19 @@ public class HelloController {
     @FXML
     private void buttonForM1()
     {
-        spaType = "Swedish";
+        this.spaType = "Swedish";
     }
 
     @FXML
     private void buttonForM2()
     {
-        spaType = "Shiatsu";
+        this.spaType = "Shiatsu";
     }
 
     @FXML
     private void buttonForM3()
     {
-        spaType = "Deep Tissue";
+        this.spaType = "Deep Tissue";
     }
 
 
@@ -130,7 +131,7 @@ public class HelloController {
             String name = "facial-page.fxml";
             String title = "Facial";
             makePage(name, title,event);
-            spa = title.toUpperCase();
+            this.spa = title.toUpperCase();
 
         } catch (Exception e) {
             System.out.println("Can't load a new window");
@@ -140,13 +141,13 @@ public class HelloController {
     @FXML
     private void buttonForF1()
     {
-        spaType = "Normal";
+        this.spaType = "Normal";
     }
 
     @FXML
     private void buttonForF2()
     {
-        spaType = "Collagen";
+        this.spaType = "Collagen";
     }
 
     @FXML
@@ -156,7 +157,7 @@ public class HelloController {
             String name = "special-treatment-page.fxml";
             String title = "Special Treatment";
             makePage(name, title,event);
-            spa = title.toUpperCase();
+            this.spa = title.toUpperCase();
 
         } catch (Exception e) {
             System.out.println("Can't load a new window");
@@ -166,22 +167,22 @@ public class HelloController {
     @FXML
     private void buttonForST1()
     {
-        spaType = "Hot Stone";
+        this.spaType = "Hot Stone";
     }
     @FXML
     private void buttonForST2()
     {
-        spaType = "Sugar Scrub";
+        this.spaType = "Sugar Scrub";
     }
     @FXML
     private void buttonForST3()
     {
-        spaType = "Herbal Body Wrap";
+        this.spaType = "Herbal Body Wrap";
     }
     @FXML
     private void buttonForST4()
     {
-        spaType = "Botanical Mud Wrap";
+        this.spaType = "Botanical Mud Wrap";
     }
 
 
@@ -189,8 +190,8 @@ public class HelloController {
     private void buttonForBath(ActionEvent event)
     {
         String title = "Mineral Bath";
-        spa = title.toUpperCase();
-        spaType = "";
+        this.spa = title.toUpperCase();
+        this.spaType = "";
 
         try {
             String name = "mineral-bath-page.fxml";
@@ -232,29 +233,53 @@ public class HelloController {
     @FXML
     private void handleButtonActionForSubmit (ActionEvent event)
     {
+        System.out.println(this.spa == null ? "DID NOT SHOW": "DID SHOW");
+        Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
         try {
             String name = "payment-page.fxml";
             String title = "Payment";
-            makePage(name, title,event);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(name));
+            Parent root1 = fxmlLoader.load();
+            //Replaces existing window
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setTitle(title);
+
+            variable(290,370);
+
+            /*Group group = new Group(variableLabel);
+            Scene scene = new Scene(group, 400, 300);*/
+
+            int HEIGHT = 1920, WIDTH = 1080;
+            stage.setScene(new Scene(root1, HEIGHT, WIDTH));
+            stage.show();
 
         } catch (Exception e) {
             System.out.println("Can't load a new window");
         }
     }
 
+    //Try to display variables that were passed in
+    private void variable(int x, int y)
+    {
+        Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
+        Label variableLabel = new Label();
+        variableLabel.setFont(new Font(30));
+        variableLabel.setText(SpaReservation.displayReservation(rs));
+        variableLabel.setLayoutX(x);
+        variableLabel.setLayoutY(y);
+    }
+
     @FXML
     private void handleButtonActionForPurchase (ActionEvent event)
     {
-        Reservation rs = SpaReservation.spaServices(time,name,spa,spaType,duration);
+        System.out.println(this.spa);
+        Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
         //Add detail to the payment page and add to database
 
         try {
             String name = "confirmation-payment-page.fxml";
             String title = "Confirmation Payment";
 
-            Label variableLabel = new Label();
-            variableLabel.setFont(new Font(30));
-            variableLabel.setText(SpaReservation.displayReservation(rs));
 
             makePage(name, title,event);
 

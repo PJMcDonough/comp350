@@ -15,8 +15,12 @@ public class SpaReservation
     public static boolean[] availableTime = new boolean[TIMES_OPEN]; // 12hrs available
     private static Scanner scan = new Scanner(System.in);
     private static LinkedList<Reservation> totalReservation = new LinkedList<>();
-    private static SpaReservationSQL database;
     public static double totalRevenue = 0;
+
+
+    /*
+        Made considerable changes for the JavaFx usage, most would not run on JavaFx page
+    */
 
     private static boolean closedHours(int result)
     {
@@ -28,12 +32,31 @@ public class SpaReservation
     */
     public static Reservation spaServices(double start,String customerName,String spaTypeInput,String specificTypeInput,double duration) {
         // Either massage, facial, special treatment, or bath
+        if(spaTypeInput == null)
+        {
+            System.out.println("Sorry looks like the spaTypeInput is null");
+            return null;
+        }
+
+        if(specificTypeInput == null)
+        {
+            System.out.println("Sorry looks like the specificInput is null");
+            return null;
+        }
+
+        if(customerName == null)
+        {
+            System.out.println("Sorry looks like the custerName is null");
+            return null;
+        }
+
+
         SpaType spa = SpaType.valueOf(spaTypeInput);
         SpecialType specialMassage = SpecialType.valueOf(specificTypeInput);
 
         try {
             //adds a new reservation into the database
-            database.getInsertionCustomerOp(customerName, " ", start, start + duration);
+            new SpaReservationSQL().getInsertionCustomerOp(customerName, " ", start, start + duration);
         }catch (Exception e)
         {
             System.out.println("Sorry couldn't add to database");
@@ -76,7 +99,7 @@ public class SpaReservation
        Reservation temp = addReservation(appointmentInput,spaTypeInput.toUpperCase(),fName.concat(" " + lName),false);
 
        //adds a new reservation into the database
-       database.getInsertionCustomerOp(fName,lName,temp.getStartTime(),(temp.getStartTime() + temp.getTime()));
+       new SpaReservationSQL().getInsertionCustomerOp(fName,lName,temp.getStartTime(),(temp.getStartTime() + temp.getTime()));
     }
 
     private static int[] cardInfo()
@@ -283,10 +306,10 @@ public class SpaReservation
         String input = scan.next();
 
         if((res = findName(input)) != null)
-            database.getOperationName("REMOVE CUSTOMER",res.getName());
+            new SpaReservationSQL().getOperationName("REMOVE CUSTOMER",res.getName());
 
         if ((res = findTime(input)) != null)
-            database.getOperationTime("REMOVE",res.getStartTime());
+            new SpaReservationSQL().getOperationTime("REMOVE",res.getStartTime());
 
         if (res == null) // if none found do nothing
             return;
@@ -357,7 +380,7 @@ public class SpaReservation
                     System.out.println("\n");
                 }*/
             //Reading from database
-            database.getViewOperation("NAME");
+            new SpaReservationSQL().getViewOperation("NAME");
         }catch (ClassCastException cce)
         {
             System.out.println("Sorry there are no available reservations");
@@ -512,5 +535,13 @@ public class SpaReservation
             }
         return result;
     }
+
+   /* private static void importTimeFromDatabase()
+    {
+        try{
+
+            String database = new SpaReservationSQLDisplay().displayCustomerUnavailable();
+        }
+    }*/
 
 }
