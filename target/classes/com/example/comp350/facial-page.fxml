@@ -20,6 +20,7 @@
 
             <!-- Options in Facial -->
             <Text layoutX="270.0" layoutY="300.0" text="Facial Types:"> </Text>
+<<<<<<< HEAD
             <Button layoutX="270.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Normal" onAction="#buttonForF1" />
             <Button layoutX="440.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Collagen" onAction="#buttonForF2" />
 
@@ -30,6 +31,13 @@
             <!-- Cancellation/Submit Button  -->
             <Button layoutX="950.0" layoutY="150.0" prefHeight="25.0" prefWidth="100.0" text="Cancel" onAction="#handleButtonActionForMake"/>
             <Button layoutX="900.0" layoutY="750.0" prefHeight="25.0" prefWidth="100.0" text="Submit" onAction="#handleButtonActionForSubmit"/>
+=======
+            <Button layoutX="270.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Normal"/>
+            <Button layoutX="440.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Collagen" />
+
+            <!-- Cancellation Button  -->
+            <Button layoutX="950.0" layoutY="150.0" prefHeight="25.0" prefWidth="100.0" text="Cancel" onAction="#handleButtonActionForMake"/>
+>>>>>>> fdb8441 (cnnection)
 
         </children>
     </AnchorPane>

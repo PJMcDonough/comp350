@@ -4,7 +4,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+<<<<<<< HEAD
 <?import javafx.scene.chart.NumberAxis?>
+=======
+>>>>>>> fdb8441 (cnnection)
 <VBox prefHeight="1920.0" prefWidth="1080.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.comp350.HelloController">
     <AnchorPane maxHeight="1920.0" maxWidth="1080.0"  prefHeight="1080.0" prefWidth="1920.0" VBox.vgrow="ALWAYS">
@@ -20,6 +23,7 @@
             <Text layoutX="250.0" layoutY="150.0" text="Special Treatments"> </Text>
 
             <!-- Options in Special Treatment -->
+<<<<<<< HEAD
             <Text layoutX="270.0" layoutY="300.0" text="Special Treatment Types:"> </Text>
             <Button layoutX="270.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Hot Stone" onAction="#buttonForST1"/>
             <Button layoutX="440.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Sugar Scrub" onAction="#buttonForST2"/>
@@ -37,6 +41,16 @@
             <Button layoutX="950.0" layoutY="150.0" prefHeight="25.0" prefWidth="100.0" text="Cancel" onAction="#handleButtonActionForMake"/>
             <Button layoutX="900.0" layoutY="750.0" prefHeight="25.0" prefWidth="100.0" text="Submit" onAction="#handleButtonActionForSubmit"/>
 
+=======
+            <Text layoutX="270.0" layoutY="150.0" text="Special Treatment Types:"> </Text>
+            <Button layoutX="270.0" layoutY="170.0" prefHeight="50.0" prefWidth="150.0" text="Hot Stone"/>
+            <Button layoutX="430.0" layoutY="170.0" prefHeight="50.0" prefWidth="150.0" text="Sugar Scrub" />
+            <Button layoutX="590.0" layoutY="170.0" prefHeight="50.0" prefWidth="150.0" text="Herbal Body Wrap"/>
+            <Button layoutX="740.0" layoutY="170.0" prefHeight="50.0" prefWidth="150.0" text="Botanical Mud Wrap"/>
+
+            <!-- Cancellation Button  -->
+            <Button layoutX="950.0" layoutY="100.0" prefHeight="50.0" prefWidth="100.0" text="Cancel" onAction="#handleButtonActionForMake"/>
+>>>>>>> fdb8441 (cnnection)
 
 
         </children>
