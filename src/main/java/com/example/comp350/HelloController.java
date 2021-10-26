@@ -12,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -23,41 +24,8 @@ public class HelloController {
     private String spa;
     private String spaType;
     private double time;
-    private String name;
+    private String name = "IA";
     private double duration;
-
-
-   /* public Button setReservation;
-
-    @FXML
-    private Label welcomeText;
-    @FXML
-    public Button makeReservation;
-
-    @FXML
-    public TextField nameOrDate;
-
-    public void onMakeReservationClick() throws SQLException {
-        SpaReservation.makeSpaReservation();
-    }
-
-    @FXML
-    public void onViewReservationClick() {
-        SpaReservation.displayReservation();
-    }
-
-    public void onRemoveReservationClick() throws SQLException {SpaReservation.removeReservation();}
-*/
-    /* @FXML
-     protected void onHelloButtonClick() {
-         welcomeText.setText("Welcome to JavaFX Application!");
-     }
-   /*public Button Bookingbtn;
-     public void bookingAction() {
-         Booking book = new Booking();
-         book.book();
-     }*/
-
 
     public void makePage(String fxml, String title, ActionEvent event) throws IOException
     {
@@ -110,12 +78,8 @@ public class HelloController {
         duration = .5;
     }
 
-    private void print(double duration) {
-        System.out.println(duration);
-    }
-
     @FXML
-    private void buttonForTime2(int num)
+    private void buttonForTime2()
     {
         duration = 1.0;
     }
@@ -268,14 +232,32 @@ public class HelloController {
     @FXML
     private void handleButtonActionForSubmit (ActionEvent event)
     {
-        Reservation rs = SpaReservation.spaServices(time,name,spa,spaType);
-
-        //Add detail to the payment page and add to database
-
         try {
             String name = "payment-page.fxml";
             String title = "Payment";
             makePage(name, title,event);
+
+        } catch (Exception e) {
+            System.out.println("Can't load a new window");
+        }
+    }
+
+    @FXML
+    private void handleButtonActionForPurchase (ActionEvent event)
+    {
+        Reservation rs = SpaReservation.spaServices(time,name,spa,spaType,duration);
+        //Add detail to the payment page and add to database
+
+        try {
+            String name = "confirmation-payment-page.fxml";
+            String title = "Confirmation Payment";
+
+            Label variableLabel = new Label();
+            variableLabel.setFont(new Font(30));
+            variableLabel.setText(SpaReservation.displayReservation(rs));
+
+            makePage(name, title,event);
+
 
         } catch (Exception e) {
             System.out.println("Can't load a new window");
