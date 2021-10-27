@@ -26,7 +26,7 @@
             <Button layoutX="610.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Special Treatment" onAction="#buttonForSpecialTreat"/>
             <Button layoutX="780.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Mineral Bath" onAction="#buttonForBath"/>
 
-            <Text layoutX="270.0" layoutY="480.0" text="Time Duration: "> </Text>
+            <Text layoutX="270.0" layoutY="480.0" text="Duration: "> </Text>
             <Button layoutX="270.0" layoutY="500.0" prefHeight="50.0" prefWidth="150.0" text="60 mins" onAction="#buttonForM1"/>
             <Button layoutX="440.0" layoutY="500.0" prefHeight="50.0" prefWidth="150.0" text="90 mins" onAction="#buttonForM2"/>
 
