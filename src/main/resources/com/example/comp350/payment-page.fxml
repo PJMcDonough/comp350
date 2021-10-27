@@ -19,7 +19,7 @@
             <Text layoutX="270.0" layoutY="150.0" text="Payment"> </Text>
 
             <!-- Body -->
-            <Text layoutX="290.0" layoutY="225.0" text="Your Order"> </Text>
+            <Text layoutX="290.0" layoutY="225.0" text="Customer Order"> </Text>
 
             <!-- TODO: List all using database  -->
 
