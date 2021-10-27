@@ -1,4 +1,9 @@
 # comp350
+## Aproach
+This is an aplication for the front desk. 
+One of the more annoying things when working with login applications is the race condition that happens when multiple people are registering at the same time. 
+We avoid that.
+
 ## "Mid in Your Eye Spa" Application
 
 The project is to create software for “Mud in Your Eye” (MiYE), a new, small hot spring health spa, located in a remote, scenic part of the US. 
