@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
@@ -20,25 +21,33 @@ public class HelloController {
     private String name;
     private double duration;
 
+    //TODO: Textfield for time
+    //TODO: Fix problem with spaType == null
+    //TODO: Check if name or time is null
+    //TODO: List everything about the purchase
+    //TODO: Confirmation page needs work
+
+    //TODO: Functionality to the one or two rooms (2nd-ary)
+
 
     //Solved problem:  we want to use id to save it to a variable and use that to get the text
     //to get the string of the name or input
     @FXML
-    private TextField textField;
+    private TextField textFieldForName;
 
     @FXML
     private void handleButtonActionForName(ActionEvent event)
     {
-        String input = textField.getText();
+        String input = textFieldForName.getText();
 
         System.out.println("Name is " + input);
 
     }
     /*@FXML
     private DatePicker dateSelect;
-
+*/
     @FXML
-    private DatePicker selectTime;*/
+    private DatePicker selectTime;
 
 
     public void makePage(String fxml, String title, ActionEvent event) throws IOException
@@ -106,9 +115,9 @@ public class HelloController {
     @FXML
     private void buttonForMassage(ActionEvent event)
     {
-        String input = textField.getText();
+        this.name = textFieldForName.getText();
 
-        System.out.println("Name is " + input);
+        System.out.println("Name is " + this.name);
 
         try {
             String name = "massage-page.fxml";
@@ -207,11 +216,13 @@ public class HelloController {
     @FXML
     private void buttonForST3()
     {
+        this.spa = "FACIAL";
         this.spaType = "Herbal Body Wrap";
     }
     @FXML
     private void buttonForST4()
     {
+        this.spa = "FACIAL";
         this.spaType = "Botanical Mud Wrap";
     }
 

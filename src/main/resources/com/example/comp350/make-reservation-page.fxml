@@ -25,7 +25,7 @@
 
             <!-- Inputs name -->
             <Text layoutX="270.0" layoutY="300.0" text="Name"> </Text>
-            <TextField layoutX="270.0" layoutY="320.0"  prefHeight="1.0" prefWidth="200.0" fx:id="textField" />
+            <TextField layoutX="270.0" layoutY="320.0"  prefHeight="1.0" prefWidth="200.0" fx:id="textFieldForName" />
 
             <!-- For SPA option -->
             <Text layoutX="270.0" layoutY="450.0" text="SPA"> </Text>
