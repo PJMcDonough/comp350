@@ -7,6 +7,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -18,6 +19,27 @@ public class HelloController {
     private double time;
     private String name;
     private double duration;
+
+
+    //Solved problem:  we want to use id to save it to a variable and use that to get the text
+    //to get the string of the name or input
+    @FXML
+    private TextField textField;
+
+    @FXML
+    private void handleButtonActionForName(ActionEvent event)
+    {
+        String input = textField.getText();
+
+        System.out.println("Name is " + input);
+
+    }
+    /*@FXML
+    private DatePicker dateSelect;
+
+    @FXML
+    private DatePicker selectTime;*/
+
 
     public void makePage(String fxml, String title, ActionEvent event) throws IOException
     {
@@ -84,6 +106,10 @@ public class HelloController {
     @FXML
     private void buttonForMassage(ActionEvent event)
     {
+        String input = textField.getText();
+
+        System.out.println("Name is " + input);
+
         try {
             String name = "massage-page.fxml";
             String title = "Massage";
@@ -142,13 +168,14 @@ public class HelloController {
     @FXML
     private void buttonForF1()
     {
-        //this.spa =
+        this.spa = "FACIAL";
         this.spaType = "Normal";
     }
 
     @FXML
     private void buttonForF2()
     {
+        this.spa = "FACIAL";
         this.spaType = "Collagen";
     }
 
@@ -159,7 +186,6 @@ public class HelloController {
             String name = "special-treatment-page.fxml";
             String title = "Special Treatment";
             makePage(name, title,event);
-            this.spa = title.toUpperCase();
 
         } catch (Exception e) {
             System.out.println("Can't load a new window");
@@ -169,11 +195,13 @@ public class HelloController {
     @FXML
     private void buttonForST1()
     {
+        this.spa = "FACIAL";
         this.spaType = "Hot Stone";
     }
     @FXML
     private void buttonForST2()
     {
+        this.spa = "FACIAL";
         this.spaType = "Sugar Scrub";
     }
     @FXML
@@ -213,6 +241,8 @@ public class HelloController {
         try {
             String name = "view-reservation-page.fxml";
             String title = "View Reservation";
+
+            Table.createAndShowGUI();
             makePage(name, title,event);
 
         } catch (Exception e) {
@@ -266,6 +296,7 @@ public class HelloController {
         Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
         Label variableLabel = new Label();
         variableLabel.setFont(new Font(30));
+        assert rs != null;
         variableLabel.setText(SpaReservation.displayReservation(rs));
         variableLabel.setLayoutX(x);
         variableLabel.setLayoutY(y);
