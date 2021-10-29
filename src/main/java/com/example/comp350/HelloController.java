@@ -10,6 +10,7 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -35,20 +36,22 @@ public class HelloController {
     @FXML
     private TextField textFieldForName;
 
-    @FXML
-    private void handleButtonActionForName(ActionEvent event)
-    {
-        String input = textFieldForName.getText();
-
-        System.out.println("Name is " + input);
-
-    }
     /*@FXML
-    private DatePicker dateSelect;
-*/
+    private DatePicker dateSelect;*/
+     @FXML
+     private Text textForNameOutput;
+     @FXML
+     private Text textForSpaOutput;
+     @FXML
+     private Text textForSpaTypeOutput;
+     @FXML
+     private Text textForTimeOutput;
+     @FXML
+     private Text textForDurationOutput;
+
+
     @FXML
     private DatePicker selectTime;
-
 
     public void makePage(String fxml, String title, ActionEvent event) throws IOException
     {
@@ -116,8 +119,9 @@ public class HelloController {
     private void buttonForMassage(ActionEvent event)
     {
         this.name = textFieldForName.getText();
-
-        System.out.println("Name is " + this.name);
+        /*int[] time = SpaReservation.getTime(selectTime.getValue().toString());
+        assert time != null;
+        this.time = time[0] + time[1];*/
 
         try {
             String name = "massage-page.fxml";
@@ -273,10 +277,18 @@ public class HelloController {
         }
     }
 
+
+    private void printInputs()
+    {
+        textForNameOutput.setText(this.name);
+        textForSpaOutput.setText(this.spa);
+        textForSpaTypeOutput.setText(this.spaType);
+        textForDurationOutput.setText(String.valueOf(this.duration));
+    }
+
     @FXML
     private void handleButtonActionForSubmit (ActionEvent event)
     {
-        System.out.println(this.spa == null ? "DID NOT SHOW": "DID SHOW");
         //Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
         try {
             String name = "payment-page.fxml";
@@ -286,6 +298,9 @@ public class HelloController {
             //Replaces existing window
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             stage.setTitle(title);
+
+            printInputs();
+
             //save these to name values
             variable(290,370);
 
@@ -316,7 +331,6 @@ public class HelloController {
     @FXML
     private void handleButtonActionForPurchase (ActionEvent event)
     {
-        System.out.println(this.spa);
         Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
         //Add detail to the payment page and add to database
 

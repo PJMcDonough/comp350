@@ -16,6 +16,7 @@ public class SpaReservation
     private static Scanner scan = new Scanner(System.in);
     private static LinkedList<Reservation> totalReservation = new LinkedList<>();
     public static double totalRevenue = 0;
+    public static boolean managerMode = false;
 
 
     /*
@@ -68,17 +69,18 @@ public class SpaReservation
     /*
         Customers can add reservation or manager can manipulate to add reservations (Terminal Use)
     */
-    public static Reservation addReservation(double appointment, String spaType,String name,boolean managerMode) {
+    public static Reservation addReservation(double appointment, String spaType,String name) {
         //Manager can try to add here
         //Note: start time = 3.5 => 3:30  &  duration = 30 => half an hour
         Reservation newRes = spaServices(appointment,name,spaType,"",0.0);
+        assert newRes != null;
         markTime(appointment,newRes.getTime());
         totalReservation.add(newRes);
         makePayment(newRes);
         totalRevenue += newRes.getPrice();
 
         //Managers can force edits
-        if(!checkTime(newRes.getStartTime(),newRes.getTime(),managerMode))
+        if(!checkTime(newRes.getStartTime(),newRes.getTime()))
             removeReservation(newRes);
 
         return newRes;
@@ -96,7 +98,7 @@ public class SpaReservation
         String fName = scan.next(), lName = scan.next();
 
         //Customer wants to make the spa reservation
-       Reservation temp = addReservation(appointmentInput,spaTypeInput.toUpperCase(),fName.concat(" " + lName),false);
+       Reservation temp = addReservation(appointmentInput,spaTypeInput.toUpperCase(),fName.concat(" " + lName));
 
        //adds a new reservation into the database
        new SpaReservationSQL().getInsertionCustomerOp(fName,lName,temp.getStartTime(),(temp.getStartTime() + temp.getTime()));
@@ -242,7 +244,7 @@ public class SpaReservation
         Gets the time from the input, returns null if input has no number
         Note: uses split() to find the hour and min
     */
-    private static int[] getTime(String string)
+    public static int[] getTime(String string)
     {
         String[] time = string.split(":");
         int hour,min;
@@ -506,7 +508,7 @@ public class SpaReservation
     */
     private static void markTime(double startTime,int duration) {
         //Check if each are available before marking it
-        if(!checkTime(startTime,duration,false))
+        if(!checkTime(startTime,duration))
             return;
 
         int i = (int) (startTime - OPEN_TIME) * 2,
@@ -521,7 +523,7 @@ public class SpaReservation
         Checks to see if the time is available,
         True = it's available, False = not available
     */
-    private static boolean checkTime(double startTime, int duration,boolean managerMode)
+    private static boolean checkTime(double startTime, int duration)
     {
         boolean result = true; //Initially available
         int i = (int) (startTime - OPEN_TIME) * 2,

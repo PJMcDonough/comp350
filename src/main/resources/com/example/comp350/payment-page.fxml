@@ -21,13 +21,23 @@
             <!-- Body -->
             <Text layoutX="290.0" layoutY="225.0" text="Customer Order"> </Text>
 
-            <!-- TODO: List all using database  -->
+            <!-- Displays the customers Info and asks for payment -->
+            <Text layoutX="290.0" layoutY="350.0" text="Name" > </Text>
+            <Text layoutX="310.0" layoutY="350.0"  fx:id="textForNameOutput" > </Text>
 
-            <!--<Text layoutX="290.0" layoutY="350.0" text="Name"> </Text>
             <Text layoutX="290.0" layoutY="370.0" text="Spa"> </Text>
+            <Text layoutX="310.0" layoutY="370.0" fx:id="textForSpaOutput"> </Text>
+
             <Text layoutX="290.0" layoutY="390.0" text="Specific"> </Text>
+            <Text layoutX="310.0" layoutY="390.0" fx:id="textForSpaTypeOutput"> </Text>
+
             <Text layoutX="290.0" layoutY="410.0" text="Start Time"> </Text>
-            <Text layoutX="290.0" layoutY="430.0" text="Time"> </Text>-->
+            <Text layoutX="310.0" layoutY="410.0" fx:id="textForTimeOutput"> </Text>
+
+            <Text layoutX="290.0" layoutY="430.0" text="Time"> </Text>
+            <Text layoutX="310.0" layoutY="430.0" fx:id="textForDurationOutput"> </Text>
+
+            <!-- TODO: form of payment -->
 
             <!-- Cancellation/ Purchase Button  -->
             <Button layoutX="950.0" layoutY="150.0" prefHeight="25.0" prefWidth="100.0" text="Cancel" onAction="#handleButtonActionForMake"/>
