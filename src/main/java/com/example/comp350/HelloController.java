@@ -213,6 +213,30 @@ public class HelloController {
         }
 
     }
+    //roomServices Button
+    @FXML
+    private void handleButtonActionForServices(ActionEvent event){
+        try{
+            String name = "room-services-page.fxml";
+            String title = "View Services";
+            makePage(name, title, event);
+
+        }catch(Exception e){
+            System.out.println("Can't load a new window");
+        }
+
+    }
+    @FXML
+    private void handleButtonActionForDineIn(ActionEvent event){
+        try{
+            String name = "dine-in-page.fxml";
+            String title = "View Menu";
+            makePage(name, title, event);
+
+        }catch(Exception e){
+            System.out.println("Can't load a new window");
+        }
+    }
 
     // Options With Reservation
 

@@ -4,9 +4,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+
 <VBox prefHeight="1920.0" prefWidth="1080.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.comp350.HelloController">
-    <AnchorPane maxHeight="1920.0" maxWidth="1080.0"  prefHeight="1080.0" prefWidth="1920.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
         <children>
             <!-- In all pages -->
             <Button layoutX="180.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Home" onAction="#handleButtonActionHome"/>
@@ -16,14 +17,17 @@
             <Button layoutX="780.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Room Services" onAction="#handleButtonActionForServices"/>
             <TextArea layoutX="950.0" layoutY="36.0"  prefHeight="15.0" prefWidth="300.0" text="Search"/>
             <!-- Title -->
-            <Text layoutX="250.0" layoutY="150.0" text="Reservations"> </Text>
+            <Text layoutX="250.0" layoutY="150.0" text="Kitchen"> </Text>
 
-            <!-- Display Stuff -->
-            <Text layoutX="300.0" layoutY="250.0" text="No Reservations Available"> </Text>
+            <Text layoutX="270.0" layoutY="250.0" text="Menu"> </Text>
 
-            <Button layoutX="300.0" layoutY="450.0" prefHeight="50.0" prefWidth="150.0" text="Name:\nTime:\nSpa:\nSpecificType:"  onAction="#handleButtonActionForRemove"/>
+            <Button layoutX="270.0" layoutY="300.0" prefHeight="50.0" prefWidth="150.0" text="Steaks" />
+            <Text layoutX="290.0" layoutY="375.0" text="Fifteen Dollars"> </Text>
+            <Button layoutX="440.0" layoutY="300.0" prefHeight="50.0" prefWidth="150.0" text="Burger" />
+            <Text layoutX="460.0" layoutY="375.0" text="twelve dollars"> </Text>
+            <Button layoutX="610.0" layoutY="300.0" prefHeight="50.0" prefWidth="150.0" text="Salad" />
+            <Text layoutX="630.0" layoutY="375.0" text="Eight Dollars"> </Text>
 
         </children>
     </AnchorPane>
 </VBox>
-

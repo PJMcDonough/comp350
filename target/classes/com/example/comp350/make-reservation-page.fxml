@@ -10,10 +10,11 @@
         <children>
 
             <!-- In all pages -->
-            <Button layoutX="330.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Home" onAction="#handleButtonActionHome"/>
-            <Button layoutX="480.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Make Reservations" onAction="#handleButtonActionForMake"/>
-            <Button layoutX="630.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Reservations" onAction="#handleButtonActionForView"/>
-            <Button layoutX="780.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Remove Reservations" onAction= "#handleButtonActionForRemove"/>
+            <Button layoutX="180.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Home" onAction="#handleButtonActionHome"/>
+            <Button layoutX="330.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Make Reservations" onAction="#handleButtonActionForMake"/>
+            <Button layoutX="480.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Reservations" onAction="#handleButtonActionForView"/>
+            <Button layoutX="630.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Remove Reservations"  onAction="#handleButtonActionForRemove"/>
+            <Button layoutX="780.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Room Services" onAction="#handleButtonActionForServices"/>
             <TextArea layoutX="950.0" layoutY="36.0"  prefHeight="15.0" prefWidth="300.0" text="Search"/>
 
             <!-- Title -->
