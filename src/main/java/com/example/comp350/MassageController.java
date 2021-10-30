@@ -1,38 +1,31 @@
 package com.example.comp350;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
+
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.text.Text;
-//for tables
-
-import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.effect.DropShadow;
-import javafx.scene.input.MouseEvent;
+import javafx.scene.control.Label;
+import javafx.scene.control.TextArea;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.sql.SQLException;
-import java.util.Scanner;
 
-public class HelloController {
+public class MassageController {
     public String spa;
     private String spaType;
     private double time;
     private String name;
+    public String pgname;
     private double duration;
-    //for showing/setting tables
     @FXML
     TextArea usrname;
 
+    public void setName(String name){
+        this.name = name;
+    }
     public void makePage(String fxml, String title, ActionEvent event) throws IOException
     {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
@@ -125,7 +118,7 @@ public class HelloController {
     private void buttonForM1()
     {
         this.spa = "MASSAGE";
-        this.name = "massage-page.fxml";
+        this.pgname = "massage-page.fxml";
         this.spaType = "Swedish".toUpperCase();
     }
 
@@ -136,7 +129,7 @@ public class HelloController {
     {
 
         this.spa = "MASSAGE";
-        this.name = "massage-page.fxml";
+        this.pgname = "massage-page.fxml";
         this.spaType = "Shiatsu".toUpperCase();
     }
 
@@ -145,8 +138,8 @@ public class HelloController {
     private void buttonForM3()
     {
         this.spa = "MASSAGE";
-        this.name = "massage-page.fxml";
-        this.spaType = "Deep Tissue".toUpperCase();
+        this.pgname = "massage-page.fxml";
+        this.spaType = "Deep_Tissue".toUpperCase();
     }
 
 
@@ -228,30 +221,6 @@ public class HelloController {
         }
 
     }
-    //roomServices Button
-    @FXML
-    private void handleButtonActionForServices(ActionEvent event){
-        try{
-            String name = "room-services-page.fxml";
-            String title = "View Services";
-            makePage(name, title, event);
-
-        }catch(Exception e){
-            System.out.println("Can't load a new window");
-        }
-
-    }
-    @FXML
-    private void handleButtonActionForDineIn(ActionEvent event){
-        try{
-            String name = "dine-in-page.fxml";
-            String title = "View Menu";
-            makePage(name, title, event);
-
-        }catch(Exception e){
-            System.out.println("Can't load a new window");
-        }
-    }
 
     // Options With Reservation
 
@@ -286,9 +255,9 @@ public class HelloController {
         System.out.println(this.spa == null ? "DID NOT SHOW": "DID SHOW");
         //Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
         try {
-            String name = "payment-page.fxml";
+            String pname = "payment-page.fxml";
             String title = "Payment";
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(name));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(pname));
             Parent root1 = fxmlLoader.load();
             //Replaces existing window
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -361,14 +330,5 @@ public class HelloController {
         } catch (Exception e) {
             System.out.println("Can't load a new window");
         }
-    }
-    //make a new observable list that will return clomuns
-    public ObservableList<Reservation> getResInfo(){
-        ObservableList<Reservation> reservations = FXCollections.observableArrayList();
-        SpaType spa = SpaType.valueOf("MASSAGE");
-        SpecialType sp = SpecialType.valueOf("SWEDISH");
-        Banking b = new Banking(5,5,5,5);
-        reservations.add(new Reservation(0.0,"Wanker",spa, b, sp, 0, 0.0 ));
-        return reservations;
     }
 }

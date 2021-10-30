@@ -55,6 +55,8 @@ public class SpaReservation
         SpecialType specialMassage = SpecialType.valueOf(specificTypeInput);
 
         try {
+            //set the string name to the user name
+
             //adds a new reservation into the database
             new SpaReservationSQL().getInsertionCustomerOp(customerName, " ", start, start + duration);
         }catch (Exception e)
