@@ -29,7 +29,7 @@ public class Reservation
         this.banking = banking;
     }
 
-    public void setName(String name){this.customer = customer;}
+    public void setName(String name){this.customer = name;}
 
     public void setStartTime(double startTime) {
         this.startTime = startTime;
