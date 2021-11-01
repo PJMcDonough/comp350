@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
@@ -22,7 +21,6 @@ public class HelloController {
     private String name;
     private double duration;
 
-    //TODO: Textfield for time
     //TODO: Fix problem with spaType == null
     //TODO: Check if name or time is null
     //TODO: List everything about the purchase
@@ -35,6 +33,8 @@ public class HelloController {
     //to get the string of the name or input
     @FXML
     private TextField textFieldForName;
+    @FXML
+    private TextField selectTime;
 
     /*@FXML
     private DatePicker dateSelect;*/
@@ -48,10 +48,6 @@ public class HelloController {
      private Text textForTimeOutput;
      @FXML
      private Text textForDurationOutput;
-
-
-    @FXML
-    private DatePicker selectTime;
 
     public void makePage(String fxml, String title, ActionEvent event) throws IOException
     {
@@ -81,11 +77,11 @@ public class HelloController {
     private void handleButtonActionForMake (ActionEvent event)
     {
         //if Cancelled, resets their input
-        /*spaType = "";
+        spaType = "";
         spa = "";
         time = 0.0;
         name = "";
-        duration = 0;*/
+        duration = 0;
 
         try {
             String name = "make-reservation-page.fxml";
@@ -118,18 +114,14 @@ public class HelloController {
     @FXML
     private void buttonForMassage(ActionEvent event)
     {
-        this.name = textFieldForName.getText();
-        /*int[] time = SpaReservation.getTime(selectTime.getValue().toString());
-        assert time != null;
-        this.time = time[0] + time[1];*/
+        this.name = this.textFieldForName.getText();
+        this.time = SpaReservation.getTime(this.selectTime.getText());
 
         try {
             String name = "massage-page.fxml";
             String title = "Massage";
             this.spa = title.toUpperCase();
-            System.out.println(this.spa);
             makePage(name, title,event);
-
 
         } catch (Exception e) {
             System.out.println("Can't load a new window");
@@ -289,7 +281,7 @@ public class HelloController {
     @FXML
     private void handleButtonActionForSubmit (ActionEvent event)
     {
-        //Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
+        Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
         try {
             String name = "payment-page.fxml";
             String title = "Payment";

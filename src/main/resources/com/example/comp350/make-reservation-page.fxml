@@ -21,7 +21,7 @@
 
             <!-- Choose Date -->
             <Text layoutX="270.0" layoutY="200.0" text="Time/Date"> </Text>
-            <DatePicker layoutX="270.0" layoutY="220.0" fx:id="selectTime"/>
+            <TextField layoutX="270.0" layoutY="220.0" prefHeight="1.0" prefWidth="200.0" fx:id="selectTime"/>
 
             <!-- Inputs name -->
             <Text layoutX="270.0" layoutY="300.0" text="Name"> </Text>

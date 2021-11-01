@@ -218,22 +218,22 @@ public class SpaReservation
     private static Reservation findTime(String time)
     {
         Reservation result = null;
-        int[] timeInt = getTime(time);
+        double timeInt = getTime(time);
 
-        if(timeInt == null)
+        if(timeInt < 0)
             return null;
 
         // 1st want to find and remove it and set available time to false
         for(int i = 0; i < totalReservation.size() && result == null; i++)
         {
             Reservation reservation = totalReservation.get(i);
-            int hour = timeInt[0], min = timeInt[1];
+            int hour = (int) timeInt; double min = timeInt - hour;
 
             if(reservation.getStartTime() == hour)
             {
                 result = reservation;
-                for(int j = 0; j < (min/HALF_HOUR); j++) //Marking all as free
-                    availableTime[hour - OPEN_TIME + j] = false;
+               /* for(int j = 0; j < (min/HALF_HOUR); j++) //Marking all as free
+                    availableTime[hour - OPEN_TIME + j] = false;*/
             }
         }
 
@@ -244,27 +244,35 @@ public class SpaReservation
         Gets the time from the input, returns null if input has no number
         Note: uses split() to find the hour and min
     */
-    public static int[] getTime(String string)
+    public static double getTime(String string)
     {
+        if (!Character.isDigit(string.charAt(0)))
+            return -1.0;
+
         String[] time = string.split(":");
-        int hour,min;
+        String[] subTime = time[1].split(" ");
+        int hour; double min;
 
         try {
             hour = Integer.parseInt(time[0]);
-            min = Integer.parseInt(time[1]);
+            min = (double) Integer.parseInt(subTime[0]) / HOUR;
         }catch (NumberFormatException nfee)
         {
             System.out.println("Sorry we didn't detect any number associated with time.");
-            return null;
+            return -1.0;
         }
+
+        //if after noon, add 12 hours more
+        if (subTime[1].equals("PM") || subTime[1].equals("pm"))
+            hour += 12;
 
         if (closedHours(hour))
         {
             System.out.println("Sorry we didn't detect a valid hour.");
-            return null;
+            return -1.0;
         }
 
-        return new int[]{hour, min};
+        return hour + min;
     }
 
     private static void decrementRevenue(Reservation res)
@@ -342,24 +350,16 @@ public class SpaReservation
     */
     private static double makeAppointment()
     {
-        double result = 0;
+        double time = 0;
         String temp;
 
         do {
             temp = customerResponse("time");
-            int[] time = getTime(temp);
+            time = getTime(temp);
 
-            if(time == null)
-                continue;
+        }while(closedHours((int)time) || temp.length() > MAX_TIME_LENGTH);
 
-            result = time[0] + (double) (time[1]/HALF_HOUR);
-
-        }while(closedHours((int)result) || temp.length() > MAX_TIME_LENGTH);
-
-        if(result == OPEN_TIME && temp.endsWith("pm"))
-            result += 12;
-
-        return  result;
+        return  time;
     }
 
     /*
