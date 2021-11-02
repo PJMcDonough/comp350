@@ -12,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -26,7 +25,7 @@ public class HelloController {
     private String name;
     private double duration;
 
-    private static TableView tableView = new TableView();
+    private static TableView<Object> tableView = new TableView<>();
 
 
     //TODO: Fix problem with spaType == null
@@ -261,9 +260,7 @@ public class HelloController {
         try {
             String name = "view-reservation-page.fxml";
             String title = "View Reservation";
-            TableUI();
-            //Table.createAndShowGUI();
-            makePage(name, title,event);
+            TableUIpage(name,title,event);
 
         } catch (Exception e) {
             System.out.println("Can't load a new window");
@@ -367,11 +364,15 @@ public class HelloController {
     }
 
     //Inserted new method for table
-    public static void TableUI()
-    {
+    public void TableUIpage(String fxml, String title, ActionEvent event) throws IOException {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
+        Parent root1 = fxmlLoader.load();
+
+        //Only to
+        tableView.setEditable(false);
 
         // Creating each Column
-        TableColumn column1 = new TableColumn<>("Start Time");
+        TableColumn<Object, Object> column1 = new TableColumn<>("Start Time");
         TableColumn column2 = new TableColumn<>("Name");
         TableColumn column3 = new TableColumn<>("Spa");
         TableColumn column4 = new TableColumn<>("SpaType");
@@ -385,19 +386,16 @@ public class HelloController {
 //            tableView.getItems().add(rs);
         //tableView.getItems().add(new Person("Jane", "Deer"));
 
-        VBox vbox = new VBox(tableView);
-
-        Scene scene = new Scene(vbox);
-
-        Stage primaryStage = new Stage();
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
+        //Replaces existing window
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        int HEIGHT = 1920, WIDTH = 1080;
+        Scene scene = new Scene(root1, HEIGHT, WIDTH);
+        stage.setScene(scene);
+        stage.show();
     }
-    public static void addToTable(Reservation rs) {
-
+    public void addToTable(Reservation rs) {
         tableView.getItems().add(rs);
-
     }
 
     //make a new observable list that will return clomuns
