@@ -23,7 +23,9 @@
 
             <!-- TODO List all from database-->
 
-            <Button layoutX="300.0" layoutY="450.0" prefHeight="50.0" prefWidth="150.0" text="Name:\nTime:\nSpa:\nSpecificType:"  onAction="#handleButtonActionForRemove"/>
+            <TableCell layoutX="300.0" layoutY="300.0" text="Reservation" fx:id="">
+
+            </TableCell>
 
         </children>
     </AnchorPane>

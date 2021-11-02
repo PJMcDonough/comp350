@@ -297,35 +297,30 @@ public class SpaReservation
 
     /*
         Removes the given reservation from the list
-        Note: uses both find's to find it and erase it (Terminal Use)
+        Note: uses both find's to find it and erase it
     */
-    public static void removeReservation() throws SQLException {
+    public static Reservation removeReservation(String input)
+    {
+        Reservation res = null;
 
-        if(totalReservation.isEmpty()) //Send customers to make a reservation if there are no reservations
+        try {
+            if ((res = findName(input)) != null)
+                new SpaReservationSQL().getOperationName("REMOVE CUSTOMER", res.getName());
+
+            if (res == null && (res = findTime(input)) != null)
+                new SpaReservationSQL().getOperationTime("REMOVE", res.getStartTime());
+        }catch (Exception e)
         {
-            System.out.println("Sorry it looks like there are no reservations saved.");
-            System.out.println("Would you like to make a reservation?");
-            if(scan.next().toUpperCase().equals("YES"))
-                makeSpaReservation();
-
-            return;
+            System.out.println("Sorry, could not work");
         }
 
-        System.out.println("Please enter your time, or your name"); // your ID number,
-        Reservation res;
-        String input = scan.next();
-
-        if((res = findName(input)) != null)
-            new SpaReservationSQL().getOperationName("REMOVE CUSTOMER",res.getName());
-
-        if ((res = findTime(input)) != null)
-            new SpaReservationSQL().getOperationTime("REMOVE",res.getStartTime());
-
         if (res == null) // if none found do nothing
-            return;
+            return null;
 
         totalReservation.remove(res);
         decrementRevenue(res);
+
+        return res;
     }
 
     /*

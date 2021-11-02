@@ -1,7 +1,5 @@
 package com.example.comp350;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -9,55 +7,25 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
+import javafx.scene.control.TextArea;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class HelloController {
+public class MassageController {
     public String spa;
     private String spaType;
     private double time;
     private String name;
+    public String pgname;
     private double duration;
-
-    private static TableView tableView = new TableView();
-
-
-    //TODO: Fix problem with spaType == null
-    //TODO: Check if name or time is null
-    //TODO: List everything about the purchase
-    //TODO: Confirmation page needs work
-
-    //TODO: Functionality to the one or two rooms (2nd-ary)
-
-
-    //Solved problem:  we want to use id to save it to a variable and use that to get the text
-    //to get the string of the name or input
     @FXML
-    private TextField textFieldForName;
-    @FXML
-    private TextField selectTime;
-    @FXML
-    private TextField textFieldForRemove;
+    TextArea usrname;
 
-
-     @FXML
-     private Text textForNameOutput;
-     @FXML
-     private Text textForSpaOutput;
-     @FXML
-     private Text textForSpaTypeOutput;
-     @FXML
-     private Text textForTimeOutput;
-     @FXML
-     private Text textForDurationOutput;
-
+    public void setName(String name){
+        this.name = name;
+    }
     public void makePage(String fxml, String title, ActionEvent event) throws IOException
     {
         FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
@@ -66,15 +34,15 @@ public class HelloController {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle(title);
         int HEIGHT = 1920, WIDTH = 1080;
-        stage.setScene(new Scene(root1, HEIGHT, WIDTH));
-        stage.show();
-
         if (fxml.equalsIgnoreCase("massage-page.fxml")){
             //pass the name to another scene controller
             MassageController massageController = fxmlLoader.getController();
+            this.name =usrname.getText();
             massageController.setName(this.name);
 
         }
+        stage.setScene(new Scene(root1, HEIGHT, WIDTH));
+        stage.show();
     }
 
     @FXML
@@ -93,11 +61,11 @@ public class HelloController {
     private void handleButtonActionForMake (ActionEvent event)
     {
         //if Cancelled, resets their input
-        spaType = "";
+        /*spaType = "";
         spa = "";
         time = 0.0;
         name = "";
-        duration = 0;
+        duration = 0;*/
 
         try {
             String name = "make-reservation-page.fxml";
@@ -131,10 +99,12 @@ public class HelloController {
     private void buttonForMassage(ActionEvent event)
     {
         try {
-            String name = "massage-page.fxml";
+            String pname = "massage-page.fxml";
             String title = "Massage";
             this.spa = title.toUpperCase();
-            makePage(name, title,event);
+            System.out.println(this.spa);
+            makePage(pname, title,event);
+
 
         } catch (Exception e) {
             System.out.println("Can't load a new window");
@@ -148,6 +118,7 @@ public class HelloController {
     private void buttonForM1()
     {
         this.spa = "MASSAGE";
+        this.pgname = "massage-page.fxml";
         this.spaType = "Swedish".toUpperCase();
     }
 
@@ -156,7 +127,9 @@ public class HelloController {
     //sets the varible names for the new pane
     private void buttonForM2()
     {
+
         this.spa = "MASSAGE";
+        this.pgname = "massage-page.fxml";
         this.spaType = "Shiatsu".toUpperCase();
     }
 
@@ -165,7 +138,8 @@ public class HelloController {
     private void buttonForM3()
     {
         this.spa = "MASSAGE";
-        this.spaType = "Deep Tissue".toUpperCase();
+        this.pgname = "massage-page.fxml";
+        this.spaType = "Deep_Tissue".toUpperCase();
     }
 
 
@@ -186,14 +160,12 @@ public class HelloController {
     @FXML
     private void buttonForF1()
     {
-        this.spa = "FACIAL";
         this.spaType = "Normal";
     }
 
     @FXML
     private void buttonForF2()
     {
-        this.spa = "FACIAL";
         this.spaType = "Collagen";
     }
 
@@ -204,6 +176,7 @@ public class HelloController {
             String name = "special-treatment-page.fxml";
             String title = "Special Treatment";
             makePage(name, title,event);
+            this.spa = title.toUpperCase();
 
         } catch (Exception e) {
             System.out.println("Can't load a new window");
@@ -213,25 +186,21 @@ public class HelloController {
     @FXML
     private void buttonForST1()
     {
-        this.spa = "SPECIAL TREATMENT";
         this.spaType = "Hot Stone";
     }
     @FXML
     private void buttonForST2()
     {
-        this.spa = "SPECIAL TREATMENT";
         this.spaType = "Sugar Scrub";
     }
     @FXML
     private void buttonForST3()
     {
-        this.spa = "SPECIAL TREATMENT";
         this.spaType = "Herbal Body Wrap";
     }
     @FXML
     private void buttonForST4()
     {
-        this.spa = "SPECIAL TREATMENT";
         this.spaType = "Botanical Mud Wrap";
     }
 
@@ -261,8 +230,6 @@ public class HelloController {
         try {
             String name = "view-reservation-page.fxml";
             String title = "View Reservation";
-            TableUI();
-            //Table.createAndShowGUI();
             makePage(name, title,event);
 
         } catch (Exception e) {
@@ -280,69 +247,66 @@ public class HelloController {
         } catch (Exception e) {
             System.out.println("Can't load a new window");
         }
-
-        String input = this.textFieldForRemove.getText();
-        Reservation res = SpaReservation.removeReservation(input);
-    }
-    @FXML
-    private void handleButtonForSearch(ActionEvent event)
-    {
-        try {
-            String name = "search-remove-reservation-page.fxml";
-            String title = "Search Remove Reservation";
-            makePage(name, title,event);
-
-        } catch (Exception e) {
-            System.out.println("Can't load a new window");
-        }
-    }
-
-
-    private void printInputs()
-    {
-        textForNameOutput.setText(this.name);
-        textForSpaOutput.setText(this.spa);
-        textForSpaTypeOutput.setText(this.spaType);
-        textForDurationOutput.setText(String.valueOf(this.duration));
     }
 
     @FXML
     private void handleButtonActionForSubmit (ActionEvent event)
     {
+        System.out.println(this.spa == null ? "DID NOT SHOW": "DID SHOW");
+        //Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
         try {
-            String name = "payment-page.fxml";
+            String pname = "payment-page.fxml";
             String title = "Payment";
-            makePage(name,title,event);
-
-            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(name));
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(pname));
             Parent root1 = fxmlLoader.load();
             //Replaces existing window
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             stage.setTitle(title);
 
+
+            //save these to name values
+            /*TableColumn<Reservation, String> stTime = new TableColumn<>("StartTime");
+            stTime.setMinWidth(100);
+            stTime.setCellValueFactory(new PropertyValueFactory<>("startTime"));
+            TableColumn<Reservation, String> cust = new TableColumn<>("Customer");
+            cust.setMinWidth(100);
+            cust.setCellValueFactory(new PropertyValueFactory<>("customer"));
+            TableColumn<Reservation, String> spType = new TableColumn<>("Spa Type");
+            spType.setMinWidth(100);
+            spType.setCellValueFactory(new PropertyValueFactory<>("special"));
+            TableColumn<Reservation, String> banking = new TableColumn<>("Banking");
+            TableColumn<Reservation, String> specType = new TableColumn<>("Special Type");
+            TableColumn<Reservation, String> timeD = new TableColumn<>("TimeD");
+            TableColumn<Reservation, String> val = new TableColumn<>("Value");
+            table = new TableView<>();
+            table.setItems(getResInfo());
+            table.getColumns().addAll(stTime, cust, spType);
+            root1.getChildrenUnmodifiable().addAll(table); */
+
             variable(290,370,root1);
+            //show user detail
+
+            // show revervation details
+
+            /*Group group = new Group(variableLabel);
+            Scene scene = new Scene(group, 400, 300);*/
 
             int HEIGHT = 1920, WIDTH = 1080;
             stage.setScene(new Scene(root1, HEIGHT, WIDTH));
             stage.show();
-            /*this.name = this.textFieldForName.getText();
-            this.time = SpaReservation.getTime(this.selectTime.getText());
 
-            Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
-*/
         } catch (Exception e) {
             System.out.println("Can't load a new window");
         }
     }
 
     //Try to display variables that were passed in
-    private void variable(int x, int y, Parent r)
+    private void variable(int x, int y,Parent r)
     {
         Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
+        //Label variableLabel = new Label();
         Label variableLabel = (Label) r.lookup("#namLbl");
-
         variableLabel.setFont(new Font(30));
-        assert rs != null;
         variableLabel.setText(SpaReservation.displayReservation(rs));
         variableLabel.setLayoutX(x);
         variableLabel.setLayoutY(y);
@@ -351,62 +315,20 @@ public class HelloController {
     @FXML
     private void handleButtonActionForPurchase (ActionEvent event)
     {
+        System.out.println(this.spa);
         Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
-
         //Add detail to the payment page and add to database
-        addToTable(rs);
 
         try {
             String name = "confirmation-payment-page.fxml";
             String title = "Confirmation Payment";
+
+
             makePage(name, title,event);
+
 
         } catch (Exception e) {
             System.out.println("Can't load a new window");
         }
-    }
-
-    //Inserted new method for table
-    public static void TableUI()
-    {
-
-        // Creating each Column
-        TableColumn column1 = new TableColumn<>("Start Time");
-        TableColumn column2 = new TableColumn<>("Name");
-        TableColumn column3 = new TableColumn<>("Spa");
-        TableColumn column4 = new TableColumn<>("SpaType");
-        TableColumn column5 = new TableColumn<>("Duration");
-
-        //Add them to column
-        tableView.getColumns().addAll(column1,column2,column3,column4,column5);
-
-        // Need to get the reservation part to insert into table
-//        for(Reservation rs : reservation)
-//            tableView.getItems().add(rs);
-        //tableView.getItems().add(new Person("Jane", "Deer"));
-
-        VBox vbox = new VBox(tableView);
-
-        Scene scene = new Scene(vbox);
-
-        Stage primaryStage = new Stage();
-
-        primaryStage.setScene(scene);
-        primaryStage.show();
-    }
-    public static void addToTable(Reservation rs) {
-
-        tableView.getItems().add(rs);
-
-    }
-
-    //make a new observable list that will return clomuns
-    public ObservableList<Reservation> getResInfo(){
-        ObservableList<Reservation> reservations = FXCollections.observableArrayList();
-        SpaType spa = SpaType.valueOf("MASSAGE");
-        SpecialType sp = SpecialType.valueOf("SWEDISH");
-        Banking b = new Banking(5,5,5,5);
-        reservations.add(new Reservation(0.0,"Wanker",spa, b, sp, 0, 0.0 ));
-        return reservations;
     }
 }
