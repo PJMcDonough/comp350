@@ -20,7 +20,7 @@
 
             <!-- Options in Massage -->
             <Text layoutX="270.0" layoutY="300.0" text="Massage Types:"> </Text>
-            <Button layoutX="270.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Swedish" onAction="#buttonForM1" fx:id="button" value="SWEDISH"/>
+            <Button layoutX="270.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Swedish" onAction="#buttonForM1"/>
             <Button layoutX="440.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Shiatsu" onAction="#buttonForM2"/>
             <Button layoutX="610.0" layoutY="320.0" prefHeight="50.0" prefWidth="150.0" text="Deep Tissue" onAction="#buttonForM3"/>
 
