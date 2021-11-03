@@ -51,7 +51,6 @@ public class SpaReservation
             return null;
         }
 
-
         SpaType spa = SpaType.valueOf(spaTypeInput);
         SpecialType specialMassage = SpecialType.valueOf(specificTypeInput);
 
@@ -84,24 +83,6 @@ public class SpaReservation
             removeReservation(newRes);
 
         return newRes;
-    }
-
-    /*
-        Customers can make their reservation (Terminal Use)
-    */
-    public static void makeSpaReservation() throws SQLException
-    {
-        double appointmentInput = makeAppointment();
-        String spaTypeInput = selectingSpaType();
-
-        System.out.println("Please enter your name for the reservation");
-        String fName = scan.next(), lName = scan.next();
-
-        //Customer wants to make the spa reservation
-       Reservation temp = addReservation(appointmentInput,spaTypeInput.toUpperCase(),fName.concat(" " + lName));
-
-       //adds a new reservation into the database
-       new SpaReservationSQL().getInsertionCustomerOp(fName,lName,temp.getStartTime(),(temp.getStartTime() + temp.getTime()));
     }
 
     private static int[] cardInfo()
@@ -341,7 +322,7 @@ public class SpaReservation
     }
 
     /*
-        Asks the customer what time they would like to start their appointment
+        Asks the customer what time they would like to start their appointment (Terminal Use)
     */
     private static double makeAppointment()
     {

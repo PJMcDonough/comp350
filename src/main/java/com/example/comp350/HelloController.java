@@ -16,8 +16,6 @@ import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
 public class HelloController {
     public String spa;
     private String spaType;
@@ -29,7 +27,6 @@ public class HelloController {
 
 
     //TODO: Fix problem with spaType == null
-    //TODO: Check if name or time is null
     //TODO: List everything about the purchase
     //TODO: Confirmation page needs work
 
@@ -57,35 +54,37 @@ public class HelloController {
      @FXML
      private Text textForDurationOutput;
 
-    public void makePage(String fxml, String title, ActionEvent event) throws IOException
+    public void makePage(String fxml, String title, ActionEvent event)
     {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
-        Parent root1 = fxmlLoader.load();
-        //Replaces existing window
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle(title);
-        int HEIGHT = 1920, WIDTH = 1080;
-        stage.setScene(new Scene(root1, HEIGHT, WIDTH));
-        stage.show();
+        try{
 
-        if (fxml.equalsIgnoreCase("massage-page.fxml")){
-            //pass the name to another scene controller
-            MassageController massageController = fxmlLoader.getController();
-            massageController.setName(this.name);
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
+            Parent root1 = fxmlLoader.load();
+            //Replaces existing window
+            Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage.setTitle(title);
+            int HEIGHT = 1920, WIDTH = 1080;
+            stage.setScene(new Scene(root1, HEIGHT, WIDTH));
+            stage.show();
 
+            if (fxml.equalsIgnoreCase("massage-page.fxml")){
+                //pass the name to another scene controller
+                MassageController massageController = fxmlLoader.getController();
+                massageController.setName(this.name);
+
+            }
+
+        }catch (Exception e){
+            System.out.println("Can't load a new window");
         }
     }
 
     @FXML
     private void handleButtonActionHome(ActionEvent event)
     {
-        try {
-            String name = "hello-view.fxml";
-            String title = "MiYe";
-            makePage(name, title,event);
-        } catch (Exception e) {
-            System.out.println("Can't load a new window");
-        }
+        String name = "hello-view.fxml";
+        String title = "MiYe";
+        makePage(name, title,event);
     }
 
     @FXML
@@ -98,14 +97,9 @@ public class HelloController {
         name = "";
         duration = 0;
 
-        try {
-            String name = "make-reservation-page.fxml";
-            String title = "Make Reservation";
-            makePage(name, title,event);
-
-        } catch (Exception e) {
-            System.out.println("Can't load a new window");
-        }
+        String name = "make-reservation-page.fxml";
+        String title = "Make Reservation";
+        makePage(name, title,event);
     }
 
     @FXML
@@ -129,16 +123,10 @@ public class HelloController {
     @FXML
     private void buttonForMassage(ActionEvent event)
     {
-        try {
-            String name = "massage-page.fxml";
-            String title = "Massage";
-            this.spa = title.toUpperCase();
-            makePage(name, title,event);
-
-        } catch (Exception e) {
-            System.out.println("Can't load a new window");
-        }
-
+        String name = "massage-page.fxml";
+        String title = "Massage";
+        this.spa = title.toUpperCase();
+        makePage(name, title,event);
     }
 
     @FXML
@@ -171,15 +159,10 @@ public class HelloController {
     @FXML
     private void buttonForFacial(ActionEvent event)
     {
-        try {
-            String name = "facial-page.fxml";
-            String title = "Facial";
-            makePage(name, title,event);
-            this.spa = title.toUpperCase();
-
-        } catch (Exception e) {
-            System.out.println("Can't load a new window");
-        }
+        String name = "facial-page.fxml";
+        String title = "Facial";
+        makePage(name, title,event);
+        this.spa = title.toUpperCase();
     }
 
     @FXML
@@ -199,14 +182,9 @@ public class HelloController {
     @FXML
     private void buttonForSpecialTreat(ActionEvent event)
     {
-        try {
-            String name = "special-treatment-page.fxml";
-            String title = "Special Treatment";
-            makePage(name, title,event);
-
-        } catch (Exception e) {
-            System.out.println("Can't load a new window");
-        }
+        String name = "special-treatment-page.fxml";
+        String title = "Special Treatment";
+        makePage(name, title,event);
     }
 
     @FXML
@@ -242,13 +220,8 @@ public class HelloController {
         this.spa = title.toUpperCase();
         this.spaType = "";
 
-        try {
-            String name = "mineral-bath-page.fxml";
-            makePage(name, title,event);
-
-        } catch (Exception e) {
-            System.out.println("Can't load a new window");
-        }
+        String name = "mineral-bath-page.fxml";
+        makePage(name, title,event);
 
     }
 
@@ -257,26 +230,16 @@ public class HelloController {
     @FXML
     private void handleButtonActionForView (ActionEvent event)
     {
-        try {
-            String name = "view-reservation-page.fxml";
-            String title = "View Reservation";
-            TableUIpage(name,title,event);
-
-        } catch (Exception e) {
-            System.out.println("Can't load a new window");
-        }
+        String name = "view-reservation-page.fxml";
+        String title = "View Reservation";
+        TableUIpage(name,title,event);
     }
     @FXML
     private void handleButtonActionForRemove (ActionEvent event)
     {
-        try {
-            String name = "remove-reservation-page.fxml";
-            String title = "Remove Reservation";
-            makePage(name, title,event);
-
-        } catch (Exception e) {
-            System.out.println("Can't load a new window");
-        }
+        String name = "remove-reservation-page.fxml";
+        String title = "Remove Reservation";
+        makePage(name, title,event);
 
         String input = this.textFieldForRemove.getText();
         Reservation res = SpaReservation.removeReservation(input);
@@ -284,14 +247,9 @@ public class HelloController {
     @FXML
     private void handleButtonForSearch(ActionEvent event)
     {
-        try {
-            String name = "search-remove-reservation-page.fxml";
-            String title = "Search Remove Reservation";
-            makePage(name, title,event);
-
-        } catch (Exception e) {
-            System.out.println("Can't load a new window");
-        }
+        String name = "search-remove-reservation-page.fxml";
+        String title = "Search Remove Reservation";
+        makePage(name, title,event);
     }
 
 
@@ -301,6 +259,12 @@ public class HelloController {
         textForSpaOutput.setText(this.spa);
         textForSpaTypeOutput.setText(this.spaType);
         textForDurationOutput.setText(String.valueOf(this.duration));
+    }
+
+    private void copyTextFieldInput()
+    {
+        this.name = this.textFieldForName.getText();
+        this.time = Double.parseDouble(this.selectTime.getText());
     }
 
     @FXML
@@ -322,14 +286,11 @@ public class HelloController {
             int HEIGHT = 1920, WIDTH = 1080;
             stage.setScene(new Scene(root1, HEIGHT, WIDTH));
             stage.show();
-            /*this.name = this.textFieldForName.getText();
-            this.time = SpaReservation.getTime(this.selectTime.getText());
-
-            Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
-*/
         } catch (Exception e) {
             System.out.println("Can't load a new window");
         }
+
+        copyTextFieldInput();
     }
 
     //Try to display variables that were passed in
@@ -353,46 +314,46 @@ public class HelloController {
         //Add detail to the payment page and add to database
         addToTable(rs);
 
-        try {
-            String name = "confirmation-payment-page.fxml";
-            String title = "Confirmation Payment";
-            makePage(name, title,event);
-
-        } catch (Exception e) {
-            System.out.println("Can't load a new window");
-        }
+        String name = "confirmation-payment-page.fxml";
+        String title = "Confirmation Payment";
+        makePage(name, title,event);
     }
 
     //Inserted new method for table
-    public void TableUIpage(String fxml, String title, ActionEvent event) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
-        Parent root1 = fxmlLoader.load();
+    public void TableUIpage(String fxml, String title, ActionEvent event)  {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
+            Parent root1 = fxmlLoader.load();
 
-        //Only to
-        tableView.setEditable(false);
+            //Only to
+            tableView.setEditable(false);
 
-        // Creating each Column
-        TableColumn<Object, Object> column1 = new TableColumn<>("Start Time");
-        TableColumn column2 = new TableColumn<>("Name");
-        TableColumn column3 = new TableColumn<>("Spa");
-        TableColumn column4 = new TableColumn<>("SpaType");
-        TableColumn column5 = new TableColumn<>("Duration");
+            // Creating each Column
+            TableColumn<Object, Object> column1 = new TableColumn<>("Start Time");
+            TableColumn column2 = new TableColumn<>("Name");
+            TableColumn column3 = new TableColumn<>("Spa");
+            TableColumn column4 = new TableColumn<>("SpaType");
+            TableColumn column5 = new TableColumn<>("Duration");
 
-        //Add them to column
-        tableView.getColumns().addAll(column1,column2,column3,column4,column5);
+            //Add them to column
+            tableView.getColumns().addAll(column1, column2, column3, column4, column5);
 
-        // Need to get the reservation part to insert into table
+            // Need to get the reservation part to insert into table
 //        for(Reservation rs : reservation)
 //            tableView.getItems().add(rs);
-        //tableView.getItems().add(new Person("Jane", "Deer"));
+            //tableView.getItems().add(new Person("Jane", "Deer"));
 
-        //Replaces existing window
-        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        stage.setTitle(title);
-        int HEIGHT = 1920, WIDTH = 1080;
-        Scene scene = new Scene(root1, HEIGHT, WIDTH);
-        stage.setScene(scene);
-        stage.show();
+            //Replaces existing window
+            Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+            stage.setTitle(title);
+            int HEIGHT = 1920, WIDTH = 1080;
+            Scene scene = new Scene(root1, HEIGHT, WIDTH);
+            stage.setScene(scene);
+            stage.show();
+        }catch (Exception e)
+        {
+            System.out.println("Can't load a new window");
+        }
     }
     public void addToTable(Reservation rs) {
         tableView.getItems().add(rs);
