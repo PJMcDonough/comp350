@@ -10,12 +10,12 @@ public class SpaReservation
     private static final int MAX_TIME_LENGTH = 5;
     private static final int HALF_HOUR = 30;
     private static final int HOUR = 60;
-    private static final int HOUR_HALF = 90;
 
     public static boolean[] availableTime = new boolean[TIMES_OPEN]; // 12hrs available
     private static Scanner scan = new Scanner(System.in);
     private static LinkedList<Reservation> totalReservation = new LinkedList<>();
     public static double totalRevenue = 0;
+    public static boolean managerMode = false;
 
 
     /*
@@ -50,7 +50,6 @@ public class SpaReservation
             return null;
         }
 
-
         SpaType spa = SpaType.valueOf(spaTypeInput);
         SpecialType specialMassage = SpecialType.valueOf(specificTypeInput);
 
@@ -70,38 +69,21 @@ public class SpaReservation
     /*
         Customers can add reservation or manager can manipulate to add reservations (Terminal Use)
     */
-    public static Reservation addReservation(double appointment, String spaType,String name,boolean managerMode) {
+    public static Reservation addReservation(double appointment, String spaType,String name) {
         //Manager can try to add here
         //Note: start time = 3.5 => 3:30  &  duration = 30 => half an hour
         Reservation newRes = spaServices(appointment,name,spaType,"",0.0);
+        assert newRes != null;
         markTime(appointment,newRes.getTime());
         totalReservation.add(newRes);
         makePayment(newRes);
         totalRevenue += newRes.getPrice();
 
         //Managers can force edits
-        if(!checkTime(newRes.getStartTime(),newRes.getTime(),managerMode))
+        if(!checkTime(newRes.getStartTime(),newRes.getTime()))
             removeReservation(newRes);
 
         return newRes;
-    }
-
-    /*
-        Customers can make their reservation (Terminal Use)
-    */
-    public static void makeSpaReservation() throws SQLException
-    {
-        double appointmentInput = makeAppointment();
-        String spaTypeInput = selectingSpaType();
-
-        System.out.println("Please enter your name for the reservation");
-        String fName = scan.next(), lName = scan.next();
-
-        //Customer wants to make the spa reservation
-       Reservation temp = addReservation(appointmentInput,spaTypeInput.toUpperCase(),fName.concat(" " + lName),false);
-
-       //adds a new reservation into the database
-       new SpaReservationSQL().getInsertionCustomerOp(fName,lName,temp.getStartTime(),(temp.getStartTime() + temp.getTime()));
     }
 
     private static int[] cardInfo()
@@ -218,22 +200,22 @@ public class SpaReservation
     private static Reservation findTime(String time)
     {
         Reservation result = null;
-        int[] timeInt = getTime(time);
+        double timeInt = getTime(time);
 
-        if(timeInt == null)
+        if(timeInt < 0)
             return null;
 
         // 1st want to find and remove it and set available time to false
         for(int i = 0; i < totalReservation.size() && result == null; i++)
         {
             Reservation reservation = totalReservation.get(i);
-            int hour = timeInt[0], min = timeInt[1];
+            int hour = (int) timeInt; double min = timeInt - hour;
 
             if(reservation.getStartTime() == hour)
             {
                 result = reservation;
-                for(int j = 0; j < (min/HALF_HOUR); j++) //Marking all as free
-                    availableTime[hour - OPEN_TIME + j] = false;
+               /* for(int j = 0; j < (min/HALF_HOUR); j++) //Marking all as free
+                    availableTime[hour - OPEN_TIME + j] = false;*/
             }
         }
 
@@ -244,27 +226,35 @@ public class SpaReservation
         Gets the time from the input, returns null if input has no number
         Note: uses split() to find the hour and min
     */
-    private static int[] getTime(String string)
+    public static double getTime(String string)
     {
+        if (!Character.isDigit(string.charAt(0)))
+            return -1.0;
+
         String[] time = string.split(":");
-        int hour,min;
+        String[] subTime = time[1].split(" ");
+        int hour; double min;
 
         try {
             hour = Integer.parseInt(time[0]);
-            min = Integer.parseInt(time[1]);
+            min = (double) Integer.parseInt(subTime[0]) / HOUR;
         }catch (NumberFormatException nfee)
         {
             System.out.println("Sorry we didn't detect any number associated with time.");
-            return null;
+            return -1.0;
         }
+
+        //if after noon, add 12 hours more
+        if (subTime[1].equals("PM") || subTime[1].equals("pm"))
+            hour += 12;
 
         if (closedHours(hour))
         {
             System.out.println("Sorry we didn't detect a valid hour.");
-            return null;
+            return -1.0;
         }
 
-        return new int[]{hour, min};
+        return hour + min;
     }
 
     private static void decrementRevenue(Reservation res)
@@ -289,35 +279,30 @@ public class SpaReservation
 
     /*
         Removes the given reservation from the list
-        Note: uses both find's to find it and erase it (Terminal Use)
+        Note: uses both find's to find it and erase it
     */
-    public static void removeReservation() throws SQLException {
+    public static Reservation removeReservation(String input)
+    {
+        Reservation res = null;
 
-        if(totalReservation.isEmpty()) //Send customers to make a reservation if there are no reservations
+        try {
+            if ((res = findName(input)) != null)
+                new SpaReservationSQL().getOperationName("REMOVE CUSTOMER", res.getName());
+
+            if (res == null && (res = findTime(input)) != null)
+                new SpaReservationSQL().getOperationTime("REMOVE", res.getStartTime());
+        }catch (Exception e)
         {
-            System.out.println("Sorry it looks like there are no reservations saved.");
-            System.out.println("Would you like to make a reservation?");
-            if(scan.next().toUpperCase().equals("YES"))
-                makeSpaReservation();
-
-            return;
+            System.out.println("Sorry, could not work");
         }
 
-        System.out.println("Please enter your time, or your name"); // your ID number,
-        Reservation res;
-        String input = scan.next();
-
-        if((res = findName(input)) != null)
-            new SpaReservationSQL().getOperationName("REMOVE CUSTOMER",res.getName());
-
-        if ((res = findTime(input)) != null)
-            new SpaReservationSQL().getOperationTime("REMOVE",res.getStartTime());
-
         if (res == null) // if none found do nothing
-            return;
+            return null;
 
         totalReservation.remove(res);
         decrementRevenue(res);
+
+        return res;
     }
 
     /*
@@ -338,28 +323,20 @@ public class SpaReservation
     }
 
     /*
-        Asks the customer what time they would like to start their appointment
+        Asks the customer what time they would like to start their appointment (Terminal Use)
     */
     private static double makeAppointment()
     {
-        double result = 0;
+        double time = 0;
         String temp;
 
         do {
             temp = customerResponse("time");
-            int[] time = getTime(temp);
+            time = getTime(temp);
 
-            if(time == null)
-                continue;
+        }while(closedHours((int)time) || temp.length() > MAX_TIME_LENGTH);
 
-            result = time[0] + (double) (time[1]/HALF_HOUR);
-
-        }while(closedHours((int)result) || temp.length() > MAX_TIME_LENGTH);
-
-        if(result == OPEN_TIME && temp.endsWith("pm"))
-            result += 12;
-
-        return  result;
+        return  time;
     }
 
     /*
@@ -508,7 +485,7 @@ public class SpaReservation
     */
     private static void markTime(double startTime,int duration) {
         //Check if each are available before marking it
-        if(!checkTime(startTime,duration,false))
+        if(!checkTime(startTime,duration))
             return;
 
         int i = (int) (startTime - OPEN_TIME) * 2,
@@ -523,7 +500,7 @@ public class SpaReservation
         Checks to see if the time is available,
         True = it's available, False = not available
     */
-    private static boolean checkTime(double startTime, int duration,boolean managerMode)
+    private static boolean checkTime(double startTime, int duration)
     {
         boolean result = true; //Initially available
         int i = (int) (startTime - OPEN_TIME) * 2,

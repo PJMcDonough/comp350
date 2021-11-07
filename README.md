@@ -1,4 +1,9 @@
 # comp350
+## Aproach
+This is an aplication for the front desk. 
+One of the more annoying things when working with login applications is the race condition that happens when multiple people are registering at the same time. 
+We avoid that.
+
 ## "Mid in Your Eye Spa" Application
 
 The project is to create software for “Mud in Your Eye” (MiYE), a new, small hot spring health spa, located in a remote, scenic part of the US. 
@@ -27,8 +32,8 @@ A guest may cancel a reservation for a service at no charge, if he/she does so w
 
 Guests can reserve mineral bath servicesfor 60 minutes or 90 minutes @ $2.50/minute. 
 There are three kinds of massage services (Swedish, shiatsu, and deep tissue), which guests can schedule for 30 or 60 minutes @ $3.00/minute. 
-(There are 2 kinds of facial services (normal and collagen), which guests can schedule for 30 or 60 minutes @ $2.00/minute. 
-(There are 4 kindsof specialty treatment services (hot stone, sugar scrub, herbal body wrap, botanical mud wrap), which guests can schedule for 60 or 90 minutes @ $3.50/minute. 
+(There are 2 kinds of facial services (normal and collagen), which guests can schedule for 30 or 60 minutes @ $2.00/minute. 
+(There are 4 kindsof specialty treatment services (hot stone, sugar scrub, herbal body wrap, botanical mud wrap), which guests can schedule for 60 or 90 minutes @ $3.50/minute. 
 (No guest may reserve overlapping services, although consecutive services are allowed.  
 Only one guest at a time may reserve anyservice, except mineral bath services, which have no limit.
 The software should make it clear to the front desk clerk what appointments are available at any particular day/time.  
