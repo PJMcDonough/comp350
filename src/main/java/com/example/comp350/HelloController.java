@@ -367,8 +367,8 @@ public class HelloController {
         ObservableList<Reservation> reservations = FXCollections.observableArrayList();
         SpaType spa = SpaType.valueOf("MASSAGE");
         SpecialType sp = SpecialType.valueOf("SWEDISH");
-        Banking b = new Banking(5,5,5,5);
-        reservations.add(new Reservation(0.0,"Wanker",spa, b, sp, 0, 0.0 ));
+        //Banking b = new Banking(5,5,5,5);
+        reservations.add(new Reservation(0.0,"Wanker",spa, null, sp, 0, 0.0 ));
         return reservations;
     }
 }

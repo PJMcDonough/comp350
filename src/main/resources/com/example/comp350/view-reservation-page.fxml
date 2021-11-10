@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import jdk.javadoc.internal.doclets.formats.html.markup.Text?>
-<?import java.awt.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
 <VBox prefHeight="1920.0" prefWidth="1080.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.comp350.HelloController">
-    <AnchorPane maxHeight="1920.0" maxWidth="1080.0"  prefHeight="1080.0" prefWidth="1920.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="1920.0" maxWidth="1080.0" prefHeight="1080.0" prefWidth="1920.0" VBox.vgrow="ALWAYS">
         <children>
             <!-- In all pages -->
             <Button layoutX="180.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Home" onAction="#handleButtonActionHome"/>
