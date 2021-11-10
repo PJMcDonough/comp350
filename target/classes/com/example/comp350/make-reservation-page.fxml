@@ -20,26 +20,17 @@
             <!-- Title -->
             <Text layoutX="250.0" layoutY="150.0" text="Make New Reservation"> </Text>
 
-            <!-- Choose Date -->
-            <Text layoutX="270.0" layoutY="200.0" text="Time/Date"> </Text>
-            <DatePicker layoutX="270.0" layoutY="220.0" />
-
-            <!-- Choose Name -->
-            <Text layoutX="270.0" layoutY="300.0" text="Name" > </Text>
-            <TextArea fx:id="usrname" layoutX="270.0" layoutY="320.0"  prefHeight="1.0" prefWidth="200.0" />
-
             <!-- For SPA option -->
-            <Text layoutX="270.0" layoutY="450.0" text="SPA"> </Text>
-            <Button layoutX="270.0" layoutY="470.0" prefHeight="50.0" prefWidth="150.0" text="Massage" onAction="#buttonForMassage"/>
-            <Button layoutX="440.0" layoutY="470.0" prefHeight="50.0" prefWidth="150.0" text="Facial" onAction="#buttonForFacial"/>
-            <Button layoutX="610.0" layoutY="470.0" prefHeight="50.0" prefWidth="150.0" text="Special Treatment" onAction="#buttonForSpecialTreat"/>
-            <Button layoutX="780.0" layoutY="470.0" prefHeight="50.0" prefWidth="150.0" text="Mineral Bath" onAction="#buttonForBath"/>
+            <Text layoutX="270.0" layoutY="200.0" text="SPA"> </Text>
+            <Button layoutX="270.0" layoutY="220.0" prefHeight="50.0" prefWidth="150.0" text="Massage" onAction="#buttonForMassage"/>
+            <Button layoutX="440.0" layoutY="220.0" prefHeight="50.0" prefWidth="150.0" text="Facial" onAction="#buttonForFacial"/>
+            <Button layoutX="610.0" layoutY="220.0" prefHeight="50.0" prefWidth="150.0" text="Special Treatment" onAction="#buttonForSpecialTreat"/>
+            <Button layoutX="780.0" layoutY="220.0" prefHeight="50.0" prefWidth="150.0" text="Mineral Bath" onAction="#buttonForBath"/>
 
             <!-- For ROOM option -->
-            <Text layoutX="270.0" layoutY="600.0" text="ROOMS"> </Text>
-            <Button layoutX="270.0" layoutY="620.0" prefHeight="50.0" prefWidth="150.0" text="Single Queen Bed" />
-            <Button layoutX="440.0" layoutY="620.0" prefHeight="50.0" prefWidth="150.0" text="Double Queen Bed" />
-
+            <Text layoutX="270.0" layoutY="350.0" text="ROOMS"> </Text>
+            <Button layoutX="270.0" layoutY="370.0" prefHeight="50.0" prefWidth="150.0" text="Single Queen Bed" />
+            <Button layoutX="440.0" layoutY="370.0" prefHeight="50.0" prefWidth="150.0" text="Double Queen Bed" />
 
         </children>
     </AnchorPane>
