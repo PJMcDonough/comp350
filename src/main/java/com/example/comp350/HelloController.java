@@ -48,6 +48,7 @@ public class HelloController {
             massageController.setName(this.name);
 
         }
+
         stage.setScene(new Scene(root1, HEIGHT, WIDTH));
         stage.show();
     }
