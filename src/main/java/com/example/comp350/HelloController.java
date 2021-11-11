@@ -229,6 +229,30 @@ public class HelloController {
         }
 
     }
+    //roomServices Button
+    @FXML
+    private void handleButtonActionForServices(ActionEvent event){
+        try{
+            String name = "room-services-page.fxml";
+            String title = "View Services";
+            makePage(name, title, event);
+
+        }catch(Exception e){
+            System.out.println("Can't load a new window");
+        }
+
+    }
+    @FXML
+    private void handleButtonActionForDineIn(ActionEvent event){
+        try{
+            String name = "dine-in-page.fxml";
+            String title = "View Menu";
+            makePage(name, title, event);
+
+        }catch(Exception e){
+            System.out.println("Can't load a new window");
+        }
+    }
 
     // Options With Reservation
 
@@ -344,8 +368,8 @@ public class HelloController {
         ObservableList<Reservation> reservations = FXCollections.observableArrayList();
         SpaType spa = SpaType.valueOf("MASSAGE");
         SpecialType sp = SpecialType.valueOf("SWEDISH");
-        Banking b = new Banking(5,5,5,5);
-        reservations.add(new Reservation(0.0,"Wanker",spa, b, sp, 0, 0.0 ));
+        //Banking b = new Banking(5,5,5,5);
+        reservations.add(new Reservation(0.0,"Wanker",spa, null, sp, 0, 0.0 ));
         return reservations;
     }
 }

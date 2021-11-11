@@ -11,23 +11,20 @@
             <TextArea layoutX="950.0" layoutY="36.0"  prefHeight="15.0" prefWidth="300.0" text="Search" />
 
             <!-- In all pages -->
-            <Button layoutX="330.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Home" onAction="#handleButtonActionHome"/>
-            <Button layoutX="480.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Make Reservations" onAction="#handleButtonActionForMake"/>
-            <Button layoutX="630.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Reservations" onAction="#handleButtonActionForView"/>
-            <Button layoutX="780.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Remove Reservations"  onAction="#handleButtonActionForRemove"/>
-
+            <Button layoutX="180.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Home" onAction="#handleButtonActionHome"/>
+            <Button layoutX="330.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Make Reservations" onAction="#handleButtonActionForMake"/>
+            <Button layoutX="480.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Reservations" onAction="#handleButtonActionForView"/>
+            <Button layoutX="630.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Remove Reservations"  onAction="#handleButtonActionForRemove"/>
+            <Button layoutX="780.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Room Services" onAction="#handleButtonActionForServices"/>
+            <TextArea layoutX="950.0" layoutY="36.0"  prefHeight="15.0" prefWidth="300.0" text="Search"/>
             <!-- Title -->
             <Text layoutX="250.0" layoutY="150.0" text="Remove Reservation"> </Text>
 
             <!-- Input Name or Time -->
             <Text layoutX="270.0" layoutY="225.0" text="Name/Time"> </Text>
-            <TextArea layoutX="270.0" layoutY="250.0"  prefHeight="15.0" prefWidth="300.0" />
+            <TextField layoutX="270.0" layoutY="250.0"  prefHeight="15.0" prefWidth="300.0" fx:id="textFieldForRemove"/>
 
-            <!-- Have a list of all taken reservations -->
-
-            <Button layoutX="300.0" layoutY="450.0" prefHeight="50.0" prefWidth="150.0" text="Name:\nTime:\nSpa:\nSpecificType:"  onAction="#handleButtonActionForRemove"/>
-
-            <Button layoutX="950.0" layoutY="500.0" prefHeight="25.0" prefWidth="100.0" text="Remove" />
+            <Button layoutX="600.0" layoutY="250.0" prefHeight="25.0" prefWidth="100.0" text="Search" onAction="#handleButtonForSearch"/>
 
         </children>
     </AnchorPane>

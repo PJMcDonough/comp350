@@ -4,30 +4,29 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
+
 <VBox prefHeight="1920.0" prefWidth="1080.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.comp350.HelloController">
-    <AnchorPane maxHeight="1920.0" maxWidth="1080.0" prefHeight="1080.0" prefWidth="1920.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
         <children>
-            <!-- In all pages -->
+
             <Button layoutX="180.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Home" onAction="#handleButtonActionHome"/>
             <Button layoutX="330.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Make Reservations" onAction="#handleButtonActionForMake"/>
             <Button layoutX="480.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Reservations" onAction="#handleButtonActionForView"/>
             <Button layoutX="630.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Remove Reservations"  onAction="#handleButtonActionForRemove"/>
             <Button layoutX="780.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Room Services" onAction="#handleButtonActionForServices"/>
             <TextArea layoutX="950.0" layoutY="36.0"  prefHeight="15.0" prefWidth="300.0" text="Search"/>
-            <!-- Title -->
-            <Text layoutX="250.0" layoutY="150.0" text="Reservations"> </Text>
 
-            <!-- Display Stuff -->
-            <Text layoutX="300.0" layoutY="250.0" text="No Reservations Available"> </Text>
 
-            <!-- TODO List all from database-->
+            <Text layoutX="250.0" layoutY="150.0" text="Room Services"> </Text>
 
-            <TableCell layoutX="300.0" layoutY="300.0" text="Reservation" fx:id="">
+            <Text layoutX="270.0" layoutY="200.0" text="Room"> </Text>
+            <TextArea layoutX="270.0" layoutY="210.0"  prefHeight="1.0" prefWidth="200.0" />
 
-            </TableCell>
-
+            <!-- For ROOM Service option -->
+            <Text layoutX="270.0" layoutY="275.0" text="Options"> </Text>
+            <Button layoutX="270.0" layoutY="300.0" prefHeight="50.0" prefWidth="150.0" text="Cleaning Services" />
+            <Button layoutX="440.0" layoutY="300.0" prefHeight="50.0" prefWidth="150.0" text="Dine-in options" onAction="#handleButtonActionForDineIn"/>
         </children>
     </AnchorPane>
 </VBox>
-
