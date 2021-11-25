@@ -34,13 +34,13 @@ public class MassageController {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle(title);
         int HEIGHT = 1920, WIDTH = 1080;
-        if (fxml.equalsIgnoreCase("massage-page.fxml")){
+        //if (fxml.equalsIgnoreCase("massage-page.fxml")){
             //pass the name to another scene controller
-            MassageController massageController = fxmlLoader.getController();
-            this.name =usrname.getText();
-            massageController.setName(this.name);
+        //    MassageController massageController = fxmlLoader.getController();
+         //   this.name =usrname.getText();
+         //   massageController.setName(this.name);
 
-        }
+        //}
         stage.setScene(new Scene(root1, HEIGHT, WIDTH));
         stage.show();
     }
@@ -263,33 +263,8 @@ public class MassageController {
             Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
             stage.setTitle(title);
 
-
-            //save these to name values
-            /*TableColumn<Reservation, String> stTime = new TableColumn<>("StartTime");
-            stTime.setMinWidth(100);
-            stTime.setCellValueFactory(new PropertyValueFactory<>("startTime"));
-            TableColumn<Reservation, String> cust = new TableColumn<>("Customer");
-            cust.setMinWidth(100);
-            cust.setCellValueFactory(new PropertyValueFactory<>("customer"));
-            TableColumn<Reservation, String> spType = new TableColumn<>("Spa Type");
-            spType.setMinWidth(100);
-            spType.setCellValueFactory(new PropertyValueFactory<>("special"));
-            TableColumn<Reservation, String> banking = new TableColumn<>("Banking");
-            TableColumn<Reservation, String> specType = new TableColumn<>("Special Type");
-            TableColumn<Reservation, String> timeD = new TableColumn<>("TimeD");
-            TableColumn<Reservation, String> val = new TableColumn<>("Value");
-            table = new TableView<>();
-            table.setItems(getResInfo());
-            table.getColumns().addAll(stTime, cust, spType);
-            root1.getChildrenUnmodifiable().addAll(table); */
-
             variable(290,370,root1);
             //show user detail
-
-            // show revervation details
-
-            /*Group group = new Group(variableLabel);
-            Scene scene = new Scene(group, 400, 300);*/
 
             int HEIGHT = 1920, WIDTH = 1080;
             stage.setScene(new Scene(root1, HEIGHT, WIDTH));
@@ -297,6 +272,7 @@ public class MassageController {
 
         } catch (Exception e) {
             System.out.println("Can't load a new window");
+            System.out.println(e);
         }
     }
 

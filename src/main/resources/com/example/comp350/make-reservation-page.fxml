@@ -24,9 +24,9 @@
             <Text layoutX="270.0" layoutY="200.0" text="Time/Date"> </Text>
             <DatePicker layoutX="270.0" layoutY="220.0" />
 
-            <!-- Choose Date -->
+            <!-- Choose Name -->
             <Text layoutX="270.0" layoutY="300.0" text="Name"> </Text>
-            <TextArea layoutX="270.0" layoutY="320.0"  prefHeight="1.0" prefWidth="200.0" />
+            <TextArea fx:id="usrname" layoutX="270.0" layoutY="320.0"  prefHeight="1.0" prefWidth="200.0" />
 
             <!-- For SPA option -->
             <Text layoutX="270.0" layoutY="450.0" text="SPA"> </Text>

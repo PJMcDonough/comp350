@@ -1,0 +1,8 @@
+    #pane{
+    fx-background-image: url("Miye-homepage.jpg");
+    fx-background-repeat: stretch;
+    fx-background-size: 905 506;
+    fx-background-position: center center;
+    -fx-effect: dropshadow(three-pass-box, black, 30, 0.5, 0, 0);
+
+}
