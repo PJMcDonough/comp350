@@ -29,9 +29,16 @@ public class HelloController {
     private double time;
     private String name;
     private double duration;
+    private String room;
+    public String[] order = new String[10];
+    public int price;
+    private int orderIndex;
+    public RoomService roomService = new RoomService();
     //for showing/setting tables
     @FXML
     TextField usrname;
+    @FXML
+    TextArea roomNum;
 
     public void makePage(String fxml, String title, ActionEvent event) throws IOException
     {
@@ -41,14 +48,33 @@ public class HelloController {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle(title);
         int HEIGHT = 1920, WIDTH = 1080;
+
         if (fxml.equalsIgnoreCase("massage-page.fxml")){
-            //pass the name to another scene controller
+
             MassageController massageController = fxmlLoader.getController();
             this.name =usrname.getText();
             massageController.setName(this.name);
+            //pass the name to another scene controller
+
 
         }
+        if (fxml.equalsIgnoreCase("Dine-in-page.fxml")){
+            //pass the name to another scene controller
+            FXMLLoader serviceFxmlLoader = new FXMLLoader(getClass().getResource("Dine-in-page.fxml"));
+            Parent root2 = serviceFxmlLoader.load();
+            //Replaces existing window
+            Stage stage1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage1.setTitle(title);
+            int serviceHEIGHT = 1920, serviceWIDTH = 1080;
 
+            ServiceController serviceController =  serviceFxmlLoader.getController();
+            this.room = roomNum.getText();
+            //System.out.println(room);
+            serviceController.setRoom(this.room);
+            stage1.setScene(new Scene(root2, serviceHEIGHT, serviceWIDTH));
+            stage1.show();
+            return;
+        }
         stage.setScene(new Scene(root1, HEIGHT, WIDTH));
         stage.show();
     }
@@ -116,6 +142,7 @@ public class HelloController {
 
         } catch (Exception e) {
             System.out.println("Can't load a new window");
+            System.out.println(e);
         }
 
     }
@@ -243,16 +270,62 @@ public class HelloController {
 
     }
     @FXML
+    private void handleButtonForSteaks() {
+        order[orderIndex] = "Steak";
+        System.out.println(order[orderIndex]);
+        this.name = "Dine-in-page.fxml";
+        price += roomService.getPrice(order[orderIndex]);
+        System.out.println(price);
+        System.out.println("To room " + this.room);
+        orderIndex++;
+
+    }
+
+    @FXML
+    private void handleButtonForBurger() {
+        order[orderIndex] = "Burger";
+        System.out.println(order[orderIndex]);
+        this.name = "Dine-in-page.fxml";
+        price += roomService.getPrice(order[orderIndex]);
+        System.out.println(price);
+        System.out.println("To room " + room);
+        orderIndex++;
+    }
+
+    @FXML
+    private void handleButtonForSalad() {
+        order[orderIndex] = "SALAD";
+        System.out.println(order[orderIndex]);
+        this.name = "Dine-in-page.fxml";
+        price += roomService.getPrice(order[orderIndex]);
+        System.out.println(price);
+        System.out.println("To room " + room);
+        orderIndex++;
+    }
+    @FXML
     private void handleButtonActionForDineIn(ActionEvent event){
         try{
-            String name = "dine-in-page.fxml";
+            String name = "Dine-in-page.fxml";
             String title = "View Menu";
             makePage(name, title, event);
 
         }catch(Exception e){
-            System.out.println("Can't load a new window");
+            System.out.println(e);
         }
     }
+    @FXML
+    private void handleButtonActionForOrder(ActionEvent event){
+        try{
+            String name = "order-page.fxml";
+        String title = "confirm order";
+        makePage(name, title, event);
+
+        }catch(Exception e){
+        System.out.println("Can't load a new window");
+    }
+
+    }
+
 
     // Options With Reservation
 
@@ -344,12 +417,11 @@ public class HelloController {
         variableLabel.setLayoutX(x);
         variableLabel.setLayoutY(y);
     }
-
     @FXML
     private void handleButtonActionForPurchase (ActionEvent event)
     {
-        System.out.println(this.spa);
-        Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
+        //System.out.println(this.spa);
+        //Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
         //Add detail to the payment page and add to database
 
         try {

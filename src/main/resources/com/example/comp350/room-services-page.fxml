@@ -16,7 +16,7 @@
             <!--Background Image            -->
             <ImageView fitHeight="2000" fitWidth="2000" pickOnBounds="true" preserveRatio="true" layoutX="0" layoutY="0">
                 <image>
-                    <Image url="file:/home/exec/IdeaProjects/comp350/src/main/java/com/example/comp350/Room.png" />
+                    <Image url="file:src/main/java/com/example/comp350/Room.png" />
                 </image>
             </ImageView>
 
@@ -31,7 +31,7 @@
             <Text layoutX="250.0" layoutY="150.0" text="Room Services"> </Text>
 
             <Text layoutX="270.0" layoutY="200.0" text="Room"> </Text>
-            <TextArea layoutX="270.0" layoutY="210.0"  prefHeight="1.0" prefWidth="200.0" />
+            <TextArea fx:id="roomNum" layoutX="270.0" layoutY="210.0"  prefHeight="1.0" prefWidth="200.0" />
 
             <!-- For ROOM Service option -->
             <Text layoutX="270.0" layoutY="275.0" text="Options"> </Text>

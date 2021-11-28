@@ -15,7 +15,7 @@
             <!--Background Image            -->
             <ImageView fitHeight="2000" fitWidth="2000" pickOnBounds="true" preserveRatio="true" layoutX="0" layoutY="0">
                 <image>
-                    <Image url="file:/home/exec/IdeaProjects/comp350/src/main/java/com/example/comp350/Facial.png" />
+                    <Image url="file:src/main/java/com/example/comp350/Facial.png" />
                 </image>
             </ImageView>
             <!-- In all pages -->

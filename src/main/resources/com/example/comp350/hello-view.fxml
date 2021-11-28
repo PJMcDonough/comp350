@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.css.Stylesheet?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
@@ -15,7 +23,7 @@
             <!--Background Image            -->
             <ImageView fitHeight="2000" fitWidth="2000" pickOnBounds="true" preserveRatio="true" layoutX="0" layoutY="0" VBox.vgrow="ALWAYS">
                 <image>
-                    <Image url="file:/home/exec/IdeaProjects/comp350/src/main/java/com/example/comp350/Hotel.png" />
+                    <Image url="file:src/main/java/com/example/comp350/Hotel.png" />
                 </image>
             </ImageView>
 
@@ -26,8 +34,8 @@
             <Button layoutX="930.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Room Services" onAction="#handleButtonActionForServices"/>
 
             <!-- Title -->
-            <Text layoutX="250.0" layoutY="150.0" text="Home" style="-fx-font-size: 50; -fx-fill: black;"> </Text>
-            <Text layoutX="300.0" layoutY="200.0" text="Hello Welcome to MiYi" style="-fx-font-size: 40; -fx-fill: black;"> </Text>
+            <Text layoutX="250.0" layoutY="150.0" text="Home" style="-fx-font-size: 50; -fx-fill: white;"> </Text>
+            <Text layoutX="300.0" layoutY="200.0" text="Hello Welcome to MiYi" style="-fx-font-size: 40; -fx-fill: white;"> </Text>
 
         </children>
     </AnchorPane>

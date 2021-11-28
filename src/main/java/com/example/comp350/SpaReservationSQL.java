@@ -7,8 +7,8 @@ public class SpaReservationSQL {
     private static Statement statement;
 
     public SpaReservationSQL() throws SQLException {
-        String url = "http://54.145.12.150";
-        conn = DriverManager.getConnection(url, "root", "cicomp420");
+        String url = "jdbc:mysql//54.145.12.150:3306";
+        conn = DriverManager.getConnection(url, "root", "comp420");
         statement = conn.createStatement();
     }
 
@@ -78,7 +78,6 @@ public class SpaReservationSQL {
     }
 
     public static void main(String[] args) throws SQLException {
-        //getOperationName("REMOVE CUSTOMER","Israel","Alonso");
     }
 
     public void getOperationTime(String op, double time) throws SQLException
