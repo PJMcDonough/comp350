@@ -28,7 +28,19 @@
             <TextArea layoutX="950.0" layoutY="36.0"  prefHeight="15.0" prefWidth="300.0" text="Search"/>
 
             <!-- Title -->
+
+            <Text layoutX="250.0" layoutY="150.0" text="Make New Reservation"> </Text>
+
+            <!-- Choose Date -->
+            <Text layoutX="270.0" layoutY="200.0" text="Time/Date"> </Text>
+            <DatePicker layoutX="270.0" layoutY="220.0" />
+
+            <!-- Choose Name -->
+            <Text layoutX="270.0" layoutY="300.0" text="Name"> </Text>
+            <TextArea fx:id="usrname" layoutX="270.0" layoutY="320.0"  prefHeight="1.0" prefWidth="200.0" />
+
             <Text layoutX="250.0" layoutY="150.0" text="Make New Reservation" style="-fx-font-size: 40; -fx-fill: black;"> </Text>
+
 
             <!-- For SPA option -->
             <Text layoutX="270.0" layoutY="200.0" text="SPA" style="-fx-font-size: 35; -fx-fill: black;"> </Text>
