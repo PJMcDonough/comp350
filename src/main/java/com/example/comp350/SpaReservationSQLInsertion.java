@@ -38,7 +38,6 @@ public class SpaReservationSQLInsertion {
 
         inputTime(preparedStmt, 3, startTime);
         inputTime(preparedStmt, 5, endTime);
-        //preparedStmt.setFloat   (4, );
 
         // execute the preparedstatement
         preparedStmt.execute();
