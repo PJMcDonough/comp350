@@ -29,9 +29,6 @@
             <Button layoutX="270.0" layoutY="500.0" prefHeight="50.0" prefWidth="150.0" text="60 mins" onAction="#buttonForTime2"/>
             <Button layoutX="440.0" layoutY="500.0" prefHeight="50.0" prefWidth="150.0" text="90 mins" onAction="#buttonForTime3"/>
 
-<!--            <Text layoutX="270.0" layoutY="650.0" text="Any Guest?"> </Text>-->
-<!--            <TextArea layoutX="270.0" layoutY="670.0" prefHeight="0.0" prefWidth="1.0"> </TextArea>-->
-
             <!-- Cancellation/Submit Button  -->
             <Button layoutX="950.0" layoutY="150.0" prefHeight="25.0" prefWidth="100.0" text="Cancel" onAction="#handleButtonActionForMake"/>
             <Button layoutX="900.0" layoutY="750.0" prefHeight="25.0" prefWidth="100.0" text="Submit" onAction="#handleButtonActionForSubmit"/>
