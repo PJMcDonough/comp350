@@ -1,7 +1,6 @@
 package com.example.comp350;
 import java.sql.SQLException;
 import java.util.*;
-//import java.sql.*;//FOR SQL STUFF?
 public class SpaReservation
 {
     private static final int TIMES_OPEN = 25; //1 = 30 mins, 25 = 12hrs
@@ -214,8 +213,6 @@ public class SpaReservation
             if(reservation.getStartTime() == hour)
             {
                 result = reservation;
-               /* for(int j = 0; j < (min/HALF_HOUR); j++) //Marking all as free
-                    availableTime[hour - OPEN_TIME + j] = false;*/
             }
         }
 
@@ -345,20 +342,6 @@ public class SpaReservation
     public static void displayReservation()
     {
         try{
-                 /*Reservation[] a = (Reservation[]) totalReservation.toArray();
-
-                for(int i = 0; i < a.length; i++)
-                {
-                    System.out.println("Customer: " + (1+i) );
-                    System.out.println("Name: " + a[i].getName());
-                    System.out.println("Price: " + a[i].getPrice());
-                    System.out.println("Spa: " + a[i].getSpa());
-                    System.out.println("Special: " + a[i].getSpecial().label);
-                    System.out.println("Starting Time: " + a[i].getStartTime());
-                    System.out.println("Duration: " + a[i].getTime());
-                    System.out.println("\n");
-                }*/
-            //Reading from database
             new SpaReservationSQL().getViewOperation("NAME");
         }catch (ClassCastException cce)
         {
@@ -514,13 +497,4 @@ public class SpaReservation
             }
         return result;
     }
-
-   /* private static void importTimeFromDatabase()
-    {
-        try{
-
-            String database = new SpaReservationSQLDisplay().displayCustomerUnavailable();
-        }
-    }*/
-
 }
