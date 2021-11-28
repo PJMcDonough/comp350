@@ -1,4 +1,4 @@
-#! /bin/bash -eu
+#!/bin/bash -eu
 
 set -o pipefail
 
@@ -25,8 +25,8 @@ copy_reference_files() {
 
   if (touch "${log}" > /dev/null 2>&1)
   then
-      echo "--- Copying files at $(date)" >> "$log"
-      find /usr/share/maven/ref/ -type f -exec bash -eu -c 'copy_reference_file /usr/share/maven/ref/ "$1" "$2"' _ {} "$log" \;
+    echo "--- Copying files at $(date)" >> "$log"
+    find /usr/share/maven/ref/ -type f -exec bash -eu -c 'copy_reference_file /usr/share/maven/ref/ "$1" "$2"' _ {} "$log" \;
   else
     echo "Can not write to ${log}. Wrong volume permissions? Carrying on ..."
   fi

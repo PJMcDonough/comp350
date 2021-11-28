@@ -15,7 +15,7 @@
             <!--Background Image            -->
             <ImageView fitHeight="2000" fitWidth="2000" pickOnBounds="true" preserveRatio="true" layoutX="0" layoutY="0" VBox.vgrow="ALWAYS">
                 <image>
-                    <Image url="file:/home/exec/IdeaProjects/comp350/src/main/java/com/example/comp350/Hotel.png" />
+                    <Image url="file:/com/example/comp350/Hotel.png" />
                 </image>
             </ImageView>
 
