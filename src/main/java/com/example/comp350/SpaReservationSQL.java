@@ -78,7 +78,6 @@ public class SpaReservationSQL {
     }
 
     public static void main(String[] args) throws SQLException {
-        //getOperationName("REMOVE CUSTOMER","Israel","Alonso");
     }
 
     public void getOperationTime(String op, double time) throws SQLException
