@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 <VBox prefHeight="1920.0" prefWidth="1080.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.comp350.MassageController">
+      fx:controller="com.example.comp350.HelloController">
     <AnchorPane maxHeight="1920.0" maxWidth="1080.0"  prefHeight="1080.0" prefWidth="1920.0" VBox.vgrow="ALWAYS">
         <children>
 

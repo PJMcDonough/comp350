@@ -6,7 +6,7 @@
 <?import javafx.scene.text.Text?>
 <VBox prefHeight="1920.0" prefWidth="1080.0" xmlns:fx="http://javafx.com/fxml"
       fx:controller="com.example.comp350.HelloController">
-    <AnchorPane maxHeight="1920.0" maxWidth="1080.0"  prefHeight="1080.0" prefWidth="1920.0" VBox.vgrow="ALWAYS">
+    <AnchorPane maxHeight="1920.0" maxWidth="1080.0" prefHeight="1080.0" prefWidth="1920.0" VBox.vgrow="ALWAYS">
         <children>
             <!-- In all pages -->
             <Button layoutX="180.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Home" onAction="#handleButtonActionHome"/>
@@ -21,7 +21,11 @@
             <!-- Display Stuff -->
             <Text layoutX="300.0" layoutY="250.0" text="No Reservations Available"> </Text>
 
-            <Button layoutX="300.0" layoutY="450.0" prefHeight="50.0" prefWidth="150.0" text="Name:\nTime:\nSpa:\nSpecificType:"  onAction="#handleButtonActionForRemove"/>
+            <!-- TODO List all from database-->
+
+            <TableCell layoutX="300.0" layoutY="300.0" text="Reservation" fx:id="">
+
+            </TableCell>
 
         </children>
     </AnchorPane>

@@ -36,7 +36,7 @@ public class HelloController {
     public RoomService roomService = new RoomService();
     //for showing/setting tables
     @FXML
-    TextArea usrname;
+    TextField usrname;
 
     public void makePage(String fxml, String title, ActionEvent event) throws IOException
     {
@@ -66,7 +66,6 @@ public class HelloController {
 
 
         }
-
         if (fxml.equalsIgnoreCase("dine-in-page.fxml")){
             //pass the name to another scene controller
             FXMLLoader serviceFxmlLoader = new FXMLLoader(getClass().getResource("dine-in-page.fxml"));
@@ -84,8 +83,6 @@ public class HelloController {
             stage1.show();
             return;
         }
-
-
         stage.setScene(new Scene(root1, HEIGHT, WIDTH));
         stage.show();
     }
@@ -194,25 +191,25 @@ public class HelloController {
     {
         try {
             String name = "facial-page.fxml";
-            String title = "Facial";
+            String title = "Facials".toUpperCase();
             makePage(name, title,event);
-            this.spa = title.toUpperCase();
+            this.spa = title;
 
         } catch (Exception e) {
-            System.out.println("Can't load a new window");
+            System.out.println(e);
         }
     }
 
     @FXML
     private void buttonForF1()
     {
-        this.spaType = "Normal";
+        this.spaType = "Normal".toUpperCase();
     }
 
     @FXML
     private void buttonForF2()
     {
-        this.spaType = "Collagen";
+        this.spaType = "Collagen".toUpperCase();
     }
 
     @FXML
@@ -419,6 +416,7 @@ public class HelloController {
     //Try to display variables that were passed in
     private void variable(int x, int y,Parent r)
     {
+
         Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
         //Label variableLabel = new Label();
         Label variableLabel = (Label) r.lookup("#namLbl");
@@ -451,8 +449,8 @@ public class HelloController {
         ObservableList<Reservation> reservations = FXCollections.observableArrayList();
         SpaType spa = SpaType.valueOf("MASSAGE");
         SpecialType sp = SpecialType.valueOf("SWEDISH");
-        Banking b = new Banking(5,5,5,5);
-        reservations.add(new Reservation(0.0,"Wanker",spa, b, sp, 0, 0.0 ));
+        //Banking b = new Banking(5,5,5,5);
+        reservations.add(new Reservation(0.0,"Wanker",spa, null, sp, 0, 0.0 ));
         return reservations;
     }
 }
