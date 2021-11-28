@@ -26,19 +26,12 @@ public class ServiceController {
     public RoomService roomService = new RoomService();
     //for showing/setting tables
     @FXML
-    TextArea usrname;
+    TextArea roomNum;
 
 
 
      //   public String name;
         public String text;
-      //  private String room;
-       // public String[] order = new String[10];
-      //  public int price;
-       // private int orderIndex;
-       // public RoomService roomService = new RoomService();
-       // @FXML
-       // TextArea usrname;
 
 
         public void setRoom(String room) {
@@ -46,23 +39,34 @@ public class ServiceController {
             this.room = room;
         }
 
-        public void makePage(String fxml, String title, ActionEvent event) throws IOException {
-            FXMLLoader fxmlLoader = new FXMLLoader(this.getClass().getResource(fxml));
-            Parent root1 = (Parent)fxmlLoader.load();
-            Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-            stage.setTitle(title);
-            int HEIGHT = 1920;
-            int WIDTH = 1080;
-           // if (fxml.equalsIgnoreCase("dine-in-page.fxml")) {
-           //     ServiceController ServiceController = fxmlLoader.getController();
-           //     room = usrname.getText();
-                //this.room = Integer.parseInt(text);
-           //     ServiceController.setRoom(this.room);
-            //}
+    public void makePage(String fxml, String title, ActionEvent event) throws IOException
+    {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(fxml));
+        Parent root1 = fxmlLoader.load();
+        //Replaces existing window
+        Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        stage.setTitle(title);
+        int HEIGHT = 1920, WIDTH = 1080;
+        if (fxml.equalsIgnoreCase("dine-in-page.fxml")){
+            //pass the name to another scene controller
+            FXMLLoader serviceFxmlLoader = new FXMLLoader(getClass().getResource("dine-in-page.fxml"));
+            Parent root2 = serviceFxmlLoader.load();
+            //Replaces existing window
+            Stage stage1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
+            stage1.setTitle(title);
+            int serviceHEIGHT = 1920, serviceWIDTH = 1080;
 
-            stage.setScene(new Scene(root1, (double)HEIGHT, (double)WIDTH));
-            stage.show();
+            ServiceController serviceController =  serviceFxmlLoader.getController();
+            this.room = roomNum.getText();
+            //System.out.println(room);
+            serviceController.setRoom(this.room);
+            stage1.setScene(new Scene(root2, serviceHEIGHT, serviceWIDTH));
+            stage1.show();
+            return;
         }
+        stage.setScene(new Scene(root1, HEIGHT, WIDTH));
+        stage.show();
+    }
 
         @FXML
         private void handleButtonActionHome(ActionEvent event) {

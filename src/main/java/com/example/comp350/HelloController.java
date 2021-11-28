@@ -37,6 +37,8 @@ public class HelloController {
     //for showing/setting tables
     @FXML
     TextField usrname;
+    @FXML
+    TextArea roomNum;
 
     public void makePage(String fxml, String title, ActionEvent event) throws IOException
     {
@@ -49,26 +51,16 @@ public class HelloController {
 
         if (fxml.equalsIgnoreCase("massage-page.fxml")){
 
-            FXMLLoader massageFxmlLoader = new FXMLLoader(getClass().getResource("massage-page.fxml"));
-            Parent rootmassage = massageFxmlLoader.load();
-
-            //Replaces existing window
-            Stage stageMassage = (Stage) ((Node)event.getSource()).getScene().getWindow();
-            stageMassage.setTitle(title);
-            int massageHEIGHT = 1920, massageWIDTH = 1080;
-            MassageController massageController = massageFxmlLoader.getController();
+            MassageController massageController = fxmlLoader.getController();
             this.name =usrname.getText();
             massageController.setName(this.name);
-            stageMassage.setScene(new Scene(rootmassage, massageHEIGHT, massageWIDTH));
-            stageMassage.show();
-            return;
             //pass the name to another scene controller
 
 
         }
-        if (fxml.equalsIgnoreCase("dine-in-page.fxml")){
+        if (fxml.equalsIgnoreCase("Dine-in-page.fxml")){
             //pass the name to another scene controller
-            FXMLLoader serviceFxmlLoader = new FXMLLoader(getClass().getResource("dine-in-page.fxml"));
+            FXMLLoader serviceFxmlLoader = new FXMLLoader(getClass().getResource("Dine-in-page.fxml"));
             Parent root2 = serviceFxmlLoader.load();
             //Replaces existing window
             Stage stage1 = (Stage) ((Node)event.getSource()).getScene().getWindow();
@@ -76,7 +68,7 @@ public class HelloController {
             int serviceHEIGHT = 1920, serviceWIDTH = 1080;
 
             ServiceController serviceController =  serviceFxmlLoader.getController();
-            this.room = usrname.getText();
+            this.room = roomNum.getText();
             //System.out.println(room);
             serviceController.setRoom(this.room);
             stage1.setScene(new Scene(root2, serviceHEIGHT, serviceWIDTH));
@@ -313,7 +305,7 @@ public class HelloController {
     @FXML
     private void handleButtonActionForDineIn(ActionEvent event){
         try{
-            String name = "dine-in-page.fxml";
+            String name = "Dine-in-page.fxml";
             String title = "View Menu";
             makePage(name, title, event);
 

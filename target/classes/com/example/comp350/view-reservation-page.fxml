@@ -4,10 +4,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
-
 <VBox prefHeight="1920.0" prefWidth="1080.0" xmlns:fx="http://javafx.com/fxml"
-      fx:controller="com.example.comp350.ServiceController">
-    <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0">
+      fx:controller="com.example.comp350.HelloController">
+    <AnchorPane maxHeight="1920.0" maxWidth="1080.0" prefHeight="1080.0" prefWidth="1920.0" VBox.vgrow="ALWAYS">
         <children>
             <!-- In all pages -->
             <Button layoutX="180.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Home" onAction="#handleButtonActionHome"/>
@@ -17,20 +16,18 @@
             <Button layoutX="780.0" layoutY="36.0" prefHeight="50.0" prefWidth="150.0" text="Room Services" onAction="#handleButtonActionForServices"/>
             <TextArea layoutX="950.0" layoutY="36.0"  prefHeight="15.0" prefWidth="300.0" text="Search"/>
             <!-- Title -->
-            <Text layoutX="250.0" layoutY="150.0" text="Kitchen"> </Text>
+            <Text layoutX="250.0" layoutY="150.0" text="Reservations"> </Text>
 
-            <Text layoutX="250.0" layoutY="250.0" text="Menu"> </Text>
+            <!-- Display Stuff -->
+            <Text layoutX="300.0" layoutY="250.0" text="No Reservations Available"> </Text>
 
-            <Button layoutX="250.0" layoutY="300.0" prefHeight="50.0" prefWidth="150.0" text="Steaks" onAction="#handleButtonForSteaks"/>
-            <Text layoutX="270.0" layoutY="375.0" text="Fifteen Dollars"> </Text>
-            <Button layoutX="420.0" layoutY="300.0" prefHeight="50.0" prefWidth="150.0" text="Burger" onAction="#handleButtonForBurger"/>
-            <Text layoutX="440.0" layoutY="375.0" text="twelve dollars"> </Text>
-            <Button layoutX="590.0" layoutY="300.0" prefHeight="50.0" prefWidth="150.0" text="Salad" onAction="#handleButtonForSalad"/>
-            <Text layoutX="610.0" layoutY="375.0" text="Eight Dollars"> </Text>
+            <!-- TODO List all from database-->
 
-            <Text layoutX="850.0" layoutY="170" text="Order"> </Text>
-            <Button layoutX="900.0" layoutY="600.0" prefHeight="25.0" prefWidth="100.0" text="order" onAction="#handleButtonForOrder"/>
+            <TableCell layoutX="300.0" layoutY="300.0" text="Reservation" fx:id="">
+
+            </TableCell>
 
         </children>
     </AnchorPane>
 </VBox>
+
