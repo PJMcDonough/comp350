@@ -15,7 +15,7 @@ public class HelloApplication extends Application {
     public void start(Stage stage) throws IOException {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("hello-view.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 1920, 1080);
+            Scene scene = new Scene(fxmlLoader.load(), 900, 900);
             stage.setTitle("MiYE!");
             //new
             //scene.getStylesheets().add(getClass().getResource("style.css").toExternalForm());

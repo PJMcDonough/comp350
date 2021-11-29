@@ -36,7 +36,7 @@ public class HelloController {
     public RoomService roomService = new RoomService();
     //for showing/setting tables
     @FXML
-    TextField usrname;
+    TextArea massageName;
     @FXML
     TextArea roomNum;
 
@@ -48,16 +48,16 @@ public class HelloController {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle(title);
         int HEIGHT = 1920, WIDTH = 1080;
-
+/*
         if (fxml.equalsIgnoreCase("massage-page.fxml")){
 
             MassageController massageController = fxmlLoader.getController();
-            this.name =usrname.getText();
-            massageController.setName(this.name);
+            //this.name = massageName.getText();
+            //massageController.setName(this.name);
             //pass the name to another scene controller
 
 
-        }
+        }*/
         if (fxml.equalsIgnoreCase("Dine-in-page.fxml")){
             //pass the name to another scene controller
             FXMLLoader serviceFxmlLoader = new FXMLLoader(getClass().getResource("Dine-in-page.fxml"));
