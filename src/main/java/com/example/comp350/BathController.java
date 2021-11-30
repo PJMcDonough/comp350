@@ -7,14 +7,13 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SpecialController {
+public class BathController {
     public String spa;
     private String spaType;
     private double time;
@@ -22,9 +21,9 @@ public class SpecialController {
     public String pgname;
     private double duration;
     @FXML
-    TextField SpecialNameTextField;
+    TextField BathNameTextField;
     @FXML
-    TextField startTimeSpecialTextField;
+    TextField startTimeBathTextField;
 
     public void setName(String name) {
         this.name = name;
@@ -80,50 +79,6 @@ public class SpecialController {
     }
 
 
-
-
-
-
-
-
-
-    @FXML
-    private void buttonForST1() {
-        this.spaType = "HOT_STONE";
-    }
-
-    @FXML
-    private void buttonForST2() {
-        this.spaType = "SUGAR_SCRUB";
-    }
-
-    @FXML
-    private void buttonForST3() {
-        this.spaType = "HERBAL_BODY_WRAP";
-    }
-
-    @FXML
-    private void buttonForST4() {
-        this.spaType = "BOTANICAL_MUD_WRAP";
-    }
-
-
-    @FXML
-    private void buttonForBath(ActionEvent event) {
-        String title = "Mineral Bath";
-        this.spa = title.toUpperCase();
-        this.spaType = "";
-
-        try {
-            String name = "mineral-bath-page.fxml";
-            makePage(name, title, event);
-
-        } catch (Exception e) {
-            System.out.println("Can't load a new window");
-        }
-
-    }
-
     // Options With Reservation
 
     @FXML
@@ -178,9 +133,10 @@ public class SpecialController {
     private void variable(int x, int y,Parent r)
     {
         // Goes to text and reads the name
-        this.name=SpecialNameTextField.getText();
-        this.spa = "SPECIAL_TREATMENT";
-        this.time = Integer.parseInt(startTimeSpecialTextField.getText());
+        this.name=BathNameTextField.getText();
+        this.spa = "MINERAL_BATH";
+        this.spaType ="NONE";
+        this.time = Integer.parseInt(startTimeBathTextField.getText());
 
         Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
         //Label variableLabel = new Label();

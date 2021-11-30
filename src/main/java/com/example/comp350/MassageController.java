@@ -285,7 +285,7 @@ public class MassageController {
         // Goes to text and reads the name
         this.name=massageNameTextField.getText();
         this.spa = "MASSAGE";
-
+        this.time= Integer.parseInt(startTimeTextField.getText());
         Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
         //Label variableLabel = new Label();
         Label variableLabel = (Label) r.lookup("#namLbl");

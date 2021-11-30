@@ -108,6 +108,7 @@ public class HelloController {
 
         } catch (Exception e) {
             System.out.println("Can't load a new window");
+            System.out.println(e);
         }
     }
 
@@ -256,6 +257,19 @@ public class HelloController {
         }
 
     }
+    @FXML
+    private void handleButtonActionOrderRoom(ActionEvent event){
+
+        String title ="Order Room";
+        try{
+            String name = "room-page.fxml";
+            makePage(name, title, event);
+        }catch(Exception e){
+            System.out.println("cant load page");
+            System.out.println(e);
+        }
+
+    }
     //roomServices Button
     @FXML
     private void handleButtonActionForServices(ActionEvent event){
@@ -266,6 +280,7 @@ public class HelloController {
 
         }catch(Exception e){
             System.out.println("Can't load a new window");
+            System.out.println(e);
         }
 
     }

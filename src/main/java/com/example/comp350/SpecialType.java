@@ -1,5 +1,6 @@
 package com.example.comp350;
 public enum SpecialType {
+    NONE("none"),
     SWEDISH("SWEDISH"),SHIATSU("SHIATSU"),DEEP_TISSUE("DEEP TISSUE"),
     NORMAL("NORMAL"), COLLAGEN("COLLAGEN"),
     HOT_STONE("HOT_STONE"),SUGAR_SCRUB("SUGAR SCRUB"),
