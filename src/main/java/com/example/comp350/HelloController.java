@@ -48,7 +48,6 @@ public class HelloController {
         Stage stage = (Stage) ((Node)event.getSource()).getScene().getWindow();
         stage.setTitle(title);
         int HEIGHT = 1920, WIDTH = 1080;
-
         if (fxml.equalsIgnoreCase("massage-page.fxml")){
 
             MassageController massageController = fxmlLoader.getController();
@@ -94,12 +93,6 @@ public class HelloController {
     @FXML
     private void handleButtonActionForMake (ActionEvent event)
     {
-        //if Cancelled, resets their input
-        /*spaType = "";
-        spa = "";
-        time = 0.0;
-        name = "";
-        duration = 0;*/
 
         try {
             String name = "make-reservation-page.fxml";
@@ -149,7 +142,7 @@ public class HelloController {
 
     @FXML
     //added new stuff here
-    //sets the varible names for the new pane
+    //sets the variable names for the new pane
     private void buttonForM1()
     {
         this.spa = "MASSAGE";
@@ -291,7 +284,6 @@ public class HelloController {
         System.out.println("To room " + room);
         orderIndex++;
     }
-
     @FXML
     private void handleButtonForSalad() {
         order[orderIndex] = "SALAD";
