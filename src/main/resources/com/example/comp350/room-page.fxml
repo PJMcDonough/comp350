@@ -29,24 +29,26 @@
 
             <!-- Title -->
 
-            <Text layoutX="250.0" layoutY="150.0" text="Make New Reservation" style="-fx-font-size: 40; -fx-fill: white;"> </Text>
+            <Text layoutX="250.0" layoutY="150.0" text="Room options" style="-fx-font-size: 40; -fx-fill: white;"> </Text>
 
+            <Text layoutX="270.0" layoutY="200.0" text="Name" style="-fx-font-size: 35; -fx-fill: white;"> </Text>
+            <TextField layoutX="270.0" layoutY="210.0"  prefHeight="1.0" prefWidth="200.0" fx:id="textFieldForNameRoom" />
 
-            <!-- For SPA option -->
-            <Text layoutX="270.0" layoutY="200.0" text="SPA" style="-fx-font-size: 35; -fx-fill: white;"> </Text>
-            <Button layoutX="270.0" layoutY="220.0" prefHeight="50.0" prefWidth="150.0" text="Massage" onAction="#buttonForMassage"/>
-            <Button layoutX="440.0" layoutY="220.0" prefHeight="50.0" prefWidth="150.0" text="Facial" onAction="#buttonForFacial"/>
-            <Button layoutX="610.0" layoutY="220.0" prefHeight="50.0" prefWidth="150.0" text="Special Treatment" onAction="#buttonForSpecialTreat"/>
-            <Button layoutX="780.0" layoutY="220.0" prefHeight="50.0" prefWidth="150.0" text="Mineral Bath" onAction="#buttonForBath"/>
+            <!-- Choose Date -->
+            <Text layoutX="270.0" layoutY="270.0" text="Start Time" style="-fx-font-size: 35; -fx-fill: white;"> </Text>
+            <TextField layoutX="270.0" layoutY="280.0" prefHeight="1.0" prefWidth="200.0" fx:id="selectTimeRoom"/>
 
             <!-- For ROOM option -->
             <Text layoutX="270.0" layoutY="350.0" text="ROOMS" style="-fx-font-size: 35; -fx-fill: white;"> </Text>
-            <Button layoutX="270.0" layoutY="370.0" prefHeight="50.0" prefWidth="150.0" text="Order Room" onAction="#handleButtonActionOrderRoom"/>
+            <Button layoutX="270.0" layoutY="370.0" prefHeight="50.0" prefWidth="150.0" text="Single Queen Bed" />
+            <Button layoutX="440.0" layoutY="370.0" prefHeight="50.0" prefWidth="150.0" text="Double Queen Bed" />
+
+            <!-- Cancellation/Submit Button  -->
+            <Button layoutX="950.0" layoutY="150.0" prefHeight="25.0" prefWidth="100.0" text="Cancel" onAction="#handleButtonActionForMake"/>
+            <Button layoutX="900.0" layoutY="350.0" prefHeight="25.0" prefWidth="100.0" text="Submit" onAction="#handleButtonActionForSubmit"/>
 
 
         </children>
     </AnchorPane>
 
 </VBox>
-
-

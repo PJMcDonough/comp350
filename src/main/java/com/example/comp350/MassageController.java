@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
 import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
@@ -21,7 +22,9 @@ public class MassageController {
     public String pgname;
     private double duration;
     @FXML
-    TextArea usrname;
+    TextField massageNameTextField;
+    @FXML
+    TextField startTimeTextField;
 
     public void setName(String name){
         this.name = name;
@@ -279,6 +282,10 @@ public class MassageController {
     //Try to display variables that were passed in
     private void variable(int x, int y,Parent r)
     {
+        // Goes to text and reads the name
+        this.name=massageNameTextField.getText();
+        this.spa = "MASSAGE";
+        this.time= Integer.parseInt(startTimeTextField.getText());
         Reservation rs = SpaReservation.spaServices(this.time,this.name,this.spa,this.spaType,this.duration);
         //Label variableLabel = new Label();
         Label variableLabel = (Label) r.lookup("#namLbl");
